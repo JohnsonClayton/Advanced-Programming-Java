@@ -8,6 +8,7 @@ package com.github.JohnsonClayton;
 /**
  *
  * @author clayt
+ * made for csci310 8/30/2018
  */
 public class HelloWorld {
     public static void main(String []args) throws Exception {
