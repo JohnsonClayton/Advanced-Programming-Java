@@ -52,7 +52,8 @@ public class mainApp extends JPanel implements ActionListener {
         if ("play".equals(e.getActionCommand())) {
             try {
                 //Play music
-                theDJ.playSingle("C:\\Users\\clayt\\projects\\csci310\\SheetMusicApp\\src\\main\\java\\mainApp\\xavier.wav");
+                //theDJ.playSingle("C:\\Users\\clayt\\projects\\csci310\\SheetMusicApp\\src\\main\\java\\mainApp\\xavier.wav");
+                theDJ.playSingle("C:\\Users\\clayt\\projects\\csci310\\SheetMusicApp\\src\\main\\java\\mainApp\\snap.wav");
             } catch (UnsupportedAudioFileException ex) {
                 Logger.getLogger(mainApp.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {

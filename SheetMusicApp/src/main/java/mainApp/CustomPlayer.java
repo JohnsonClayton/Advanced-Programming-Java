@@ -29,25 +29,52 @@ public class CustomPlayer {
     private DataLine.Info info;
     private Clip clip;
     private AudioInputStream stream;
+    private int interval;
     public void CustomPlayer() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         currentIndex = -1;
         audioQueue = new ArrayList<String>();
         pausedTime = 0.00;
+        interval = 0;
     }
     
     public void playSingle(String filename) throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
         //Play filename
         if (pausedTime == 0) {
-            //using this article : https://www.codejava.net/coding/how-to-play-back-audio-in-java-with-examples        
-            System.out.println("playSingle reached");
-            File audioFile = new File(filename);
-            stream = AudioSystem.getAudioInputStream(audioFile);
+            interval = 60; //FIX ME: The interval is messed up somewhere below
+            if (interval == 0) {
+                //using this article : https://www.codejava.net/coding/how-to-play-back-audio-in-java-with-examples        
+                System.out.println("playSingle reached");
+                File audioFile = new File(filename);
+                stream = AudioSystem.getAudioInputStream(audioFile);
 
-            format = stream.getFormat();
-            info = new DataLine.Info(Clip.class, format);
-            clip = (Clip) AudioSystem.getLine(info);
-            clip.open(stream);
-            clip.start();
+                format = stream.getFormat();
+                info = new DataLine.Info(Clip.class, format);
+                clip = (Clip) AudioSystem.getLine(info);
+                clip.open(stream);
+                clip.start();
+            } else {
+                //Play in accordance to the interval
+                File audioFile = new File(filename);
+                stream = AudioSystem.getAudioInputStream(audioFile);
+                
+                format = stream.getFormat();
+                info = new DataLine.Info(Clip.class, format);
+                clip = (Clip) AudioSystem.getLine(info);
+                clip.open(stream);
+                double start = System.currentTimeMillis();
+                double currentTime = start;
+                long millis = (long) (1000.0 * 60.0 / interval);
+                System.out.println("1 beat every " + millis + " millis");
+                while(currentTime - start < 5000) {
+                    //play beat every interval
+                    clip.setFramePosition(0);
+                    clip.start();
+                    Thread.sleep(millis);
+                    currentTime = System.currentTimeMillis();
+                    clip.stop();
+                    //System.out.println("looped");
+                }
+            }
         }
         else {
             clip.setFramePosition((int)pausedTime);
