@@ -37,13 +37,20 @@ public class HissingMicTest {
     }
 
     /**
-     * Test of main method, of class HissingMic.
+     * Test of solve method, of class HissingMic.
      */
     @Test
-    public void testMain() throws Exception {
-        System.out.println("main");
-        String[] args = null;
-        HissingMic.main(args);
+    public void testSolve() throws Exception {
+        System.out.println("solve");
+        HissingMic micTest = new HissingMic();
+        
+        micTest.setInput("test");
+        micTest.solve();
+        assertEquals("no hiss", micTest.getOutput());
+        
+        micTest.setInput("hissing");
+        micTest.solve();
+        assertEquals("hiss", micTest.getOutput());
         
     }
     
