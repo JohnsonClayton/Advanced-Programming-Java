@@ -17,7 +17,7 @@ public class CountingStarsSolution {
     Scanner in;
     PrintStream out;
     
-    int rows, columns, stars;
+    int rows, columns, stars, caseCounter;
     boolean [][] picture;
     
     
@@ -31,11 +31,13 @@ public class CountingStarsSolution {
     private void go() throws Exception{
         in = new Scanner(System.in);
         out = System.out;
+        caseCounter = 0;
         for(;;) {
             if (HaveTestCase()) {
                 readTestCase();
                 solve();
                 writeTestCase();
+                caseCounter++;
             } else {
                 break;
             }
@@ -70,7 +72,7 @@ public class CountingStarsSolution {
     }
 
     private void writeTestCase() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        out.print("Case " + caseCounter + ": " + stars);
     }
 
     private void erase(int row, int column) {

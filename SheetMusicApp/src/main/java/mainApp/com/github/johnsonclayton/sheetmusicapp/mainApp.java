@@ -1,4 +1,4 @@
-package mainApp.java;
+package mainApp.com.github.johnsonclayton.sheetmusicapp;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.AudioFormat;
@@ -18,12 +19,12 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import mainApp.CustomPlayer;
 
 
 public class mainApp extends JPanel implements ActionListener {
     protected JButton playButton, pauseButton, stopButton;
     protected CustomPlayer theDJ;
+    protected Bar bar;
     
     public mainApp() {
         playButton = new JButton("Play");
@@ -46,6 +47,20 @@ public class mainApp extends JPanel implements ActionListener {
         add(stopButton);
         
         theDJ = new CustomPlayer();
+        
+        bar = new Bar();
+        
+        //Testing Bar Functionality
+        ArrayList<Note> testNotes = new ArrayList();
+        Note note1 = new Note("440", 1, 1, 2000, "C:\\Users\\clayt\\projects\\csci310\\SheetMusicApp\\src\\main\\java\\mainApp\\com\\github\\johnsonclayton\\sheetmusicapp\\note1.wav");
+        testNotes.add(0, note1);
+        Note note2 = new Note("500", 1, 2, 2000, "C:\\Users\\clayt\\projects\\csci310\\SheetMusicApp\\src\\main\\java\\mainApp\\com\\github\\johnsonclayton\\sheetmusicapp\\note2.wav");
+        testNotes.add(1, note2);
+        Note note3 = new Note("540", 1, 3, 2000, "C:\\Users\\clayt\\projects\\csci310\\SheetMusicApp\\src\\main\\java\\mainApp\\com\\github\\johnsonclayton\\sheetmusicapp\\note3.wav");
+        testNotes.add(2, note3);
+        Note note4 = new Note("580", 1, 4, 2000, "C:\\Users\\clayt\\projects\\csci310\\SheetMusicApp\\src\\main\\java\\mainApp\\com\\github\\johnsonclayton\\sheetmusicapp\\note4.wav");
+        testNotes.add(3, note4);
+        bar.makeMeasure(1, testNotes);
     }
     
     public void actionPerformed(ActionEvent e) {
@@ -53,7 +68,8 @@ public class mainApp extends JPanel implements ActionListener {
             try {
                 //Play music
                 //theDJ.playSingle("C:\\Users\\clayt\\projects\\csci310\\SheetMusicApp\\src\\main\\java\\mainApp\\xavier.wav");
-                theDJ.playSingle("C:\\Users\\clayt\\projects\\csci310\\SheetMusicApp\\src\\main\\java\\mainApp\\snap.wav");
+                //theDJ.playSingle("C:\\Users\\clayt\\projects\\csci310\\SheetMusicApp\\src\\main\\java\\mainApp\\com\\github\\johnsonclayton\\sheetmusicapp\\snap.wav");
+                theDJ.playBar(bar);
             } catch (UnsupportedAudioFileException ex) {
                 Logger.getLogger(mainApp.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
