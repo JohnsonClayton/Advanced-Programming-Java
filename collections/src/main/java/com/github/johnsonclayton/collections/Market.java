@@ -24,4 +24,12 @@ public class Market {
     void printSales(int discountInPercent) {
         
     }
+
+    boolean hasItemByName(String item_name) {
+        return items.hasItemByName(item_name);
+    }
+
+    Cart getCartFor(Customer customer) {
+        return new Cart(this, customer);
+    }
 }

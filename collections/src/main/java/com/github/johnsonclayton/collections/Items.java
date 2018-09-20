@@ -12,5 +12,21 @@ import java.util.ArrayList;
  * @author clayt
  */
 class Items extends ArrayList<Item>{
+
+    boolean hasItemByName(String item_name) {
+        for(Item item : this) {
+            if(item.name.equals(item_name))
+                return true;
+        }
+        return false;
+    }
+    
+    int totalInCents() {
+        int sum = 0;
+        for (Item item : this) {
+            sum += item.priceInCents;
+        }
+        return sum;
+    }
     
 }

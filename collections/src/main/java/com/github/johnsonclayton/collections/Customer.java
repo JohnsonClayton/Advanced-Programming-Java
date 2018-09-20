@@ -11,6 +11,16 @@ package com.github.johnsonclayton.collections;
  */
 public class Customer {
     private int orderNumer;
-    private String name;
-    private int moneyInCents;
+    String name;
+    int moneyInCents;
+    Items items = new Items();
+    
+    Customer(String _name, int _moneyInCents){
+        name = _name;
+        moneyInCents = _moneyInCents;
+    };
+
+    boolean hasItemByName(String item_name) {
+        return items.hasItemByName(item_name);
+    }
 }
