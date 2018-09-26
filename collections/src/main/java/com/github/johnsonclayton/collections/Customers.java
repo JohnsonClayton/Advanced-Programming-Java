@@ -5,10 +5,14 @@
  */
 package com.github.johnsonclayton.collections;
 
+import java.util.TreeSet;
+
 /**
  *
  * @author clayt
  */
-class Customers {
+public class Customers extends TreeSet <Customer>{
+
+    
     
 }

@@ -9,7 +9,7 @@ package com.github.johnsonclayton.collections;
  *
  * @author clayt
  */
-public class Customer {
+public class Customer implements Comparable <Customer>{
     private int orderNumer;
     String name;
     int moneyInCents;
@@ -22,5 +22,15 @@ public class Customer {
 
     boolean hasItemByName(String item_name) {
         return items.hasItemByName(item_name);
+    }
+
+    @Override
+    public int compareTo(Customer o) {
+        return name.compareTo(o.name);
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        return name.equals(((Customer) o).name);
     }
 }

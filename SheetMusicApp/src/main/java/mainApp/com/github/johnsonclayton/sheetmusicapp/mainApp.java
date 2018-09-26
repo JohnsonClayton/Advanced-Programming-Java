@@ -1,16 +1,22 @@
 package mainApp.com.github.johnsonclayton.sheetmusicapp;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioFormat;
 
 import javax.sound.sampled.AudioInputStream;
@@ -19,6 +25,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JComponent;
 
 
 public class mainApp extends JPanel implements ActionListener {
@@ -93,7 +100,7 @@ public class mainApp extends JPanel implements ActionListener {
         }
     }
     
-    private static void createAndShowGUI() {
+    private static void createAndShowGUI() throws MalformedURLException, IOException {
         JFrame frame = new JFrame("mainApp");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("mainApp");
@@ -103,6 +110,19 @@ public class mainApp extends JPanel implements ActionListener {
         newContentPane.setOpaque(true);
         frame.setContentPane(newContentPane);
         
+        String imgPath = "C:\\Users\\clayt\\projects\\csci310\\SheetMusicApp\\src\\main\\java\\mainApp\\com\\github\\johnsonclayton\\sheetmusicapp\\note1.wav";
+        URL url;
+        try {
+            url = new URL(imgPath);
+            BufferedImage backgroundImage = ImageIO.read(url);
+            frame.setContentPane(backgroundImage);
+
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(mainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        //BufferedImage backgroundImage = ImageIO.read(url);
+        
         frame.pack();
         frame.setVisible(true);
     }
@@ -110,8 +130,22 @@ public class mainApp extends JPanel implements ActionListener {
     public static void main(String[] args) throws Exception {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                createAndShowGUI();
+                try {
+                    createAndShowGUI();
+                } catch (IOException ex) {
+                    Logger.getLogger(mainApp.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
+    }
+}
+
+class BackgroundImage extends JComponent{
+    private Image image;
+    
+    @Override
+    protected void paintComponent(Graphics graphics) {
+        super.paintComponent(graphics);
+        graphics.drawImage(image, 0, 0, this);
     }
 }
