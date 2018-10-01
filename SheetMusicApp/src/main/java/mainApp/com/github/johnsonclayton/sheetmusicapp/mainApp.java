@@ -3,6 +3,7 @@ package mainApp.com.github.johnsonclayton.sheetmusicapp;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
@@ -11,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -72,7 +74,7 @@ public class mainApp extends JPanel implements ActionListener, MouseListener{
         testNotes.add(3, note4);
         bar.makeMeasure(1, testNotes);
         
-        this.setBackground(Color.RED);
+        this.setBackground(Color.WHITE);
         
         addMouseListener(this);
     }
@@ -134,6 +136,7 @@ public class mainApp extends JPanel implements ActionListener, MouseListener{
     @Override
     public void mousePressed(MouseEvent e) {
         //System.out.println("Mouse clicked");
+            
     }
     
     @Override
@@ -154,15 +157,15 @@ public class mainApp extends JPanel implements ActionListener, MouseListener{
     @Override
     public void mouseClicked(MouseEvent e) {
         //System.out.println("Mouse clicked");
-    }
-}
-
-class BackgroundImage extends JComponent{
-    private Image image;
+        this.getGraphics().fillOval(e.getX() - (e.getX() % 25), e.getY() - (e.getY() % 25), 50, 50);
+    }   
     
     @Override
-    protected void paintComponent(Graphics graphics) {
-        super.paintComponent(graphics);
-        graphics.drawImage(image, 0, 0, this);
+    public void paint(Graphics g) {
+        g.drawLine(175, 200, 1750, 200);
+        g.drawLine(175, 250, 1750, 250);
+        g.drawLine(175, 300, 1750, 300);
+        g.drawLine(175, 350, 1750, 350);
+        g.drawLine(175, 400, 1750, 400);
     }
 }
