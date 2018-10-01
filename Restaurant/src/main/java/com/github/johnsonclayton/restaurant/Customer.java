@@ -10,5 +10,9 @@ package com.github.johnsonclayton.restaurant;
  * @author clayt
  */
 class Customer {
+    private String name;
+    Customer(String _name) {
+        name = _name;
+    }
     
 }

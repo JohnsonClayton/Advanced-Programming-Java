@@ -91,5 +91,35 @@ public class MarketTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of hasItemByName method, of class Market.
+     */
+    @Test
+    public void testHasItemByName() {
+        System.out.println("hasItemByName");
+        String item_name = "";
+        Market instance = new Market();
+        boolean expResult = false;
+        boolean result = instance.hasItemByName(item_name);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getCartFor method, of class Market.
+     */
+    @Test
+    public void testGetCartFor() {
+        System.out.println("getCartFor");
+        Customer customer = null;
+        Market instance = new Market();
+        Cart expResult = null;
+        Cart result = instance.getCartFor(customer);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

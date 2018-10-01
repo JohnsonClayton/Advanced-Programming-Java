@@ -42,5 +42,34 @@ public class ItemsTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of hasItemByName method, of class Items.
+     */
+    @Test
+    public void testHasItemByName() {
+        System.out.println("hasItemByName");
+        String item_name = "";
+        Items instance = new Items();
+        boolean expResult = false;
+        boolean result = instance.hasItemByName(item_name);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of totalInCents method, of class Items.
+     */
+    @Test
+    public void testTotalInCents() {
+        System.out.println("totalInCents");
+        Items instance = new Items();
+        int expResult = 0;
+        int result = instance.totalInCents();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

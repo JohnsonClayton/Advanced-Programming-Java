@@ -13,13 +13,64 @@ public class Restaurant {
     private Customers customers;
     private MenuItems menu_items;
     private int open_tables;
+    private Ingredients ingredientsInStock;
+    private Customers customers_waiting;
     
-    public Restaurant() {
+    public Restaurant(MenuItems _menu_items, int total_tables, Ingredients _ingredientsInStock) {
+        customers = new Customers();
+        menu_items = _menu_items;
+        open_tables = total_tables;
+        ingredientsInStock = _ingredientsInStock;
+        customers_waiting = new Customers();
+    }
+    
+    public static void main(String []args) throws Exception{
+        System.out.println("Hello, world!");
+        
+        
         
     }
-    
-    public static void main(String []args) {
-        System.out.println("Hello, world!");
+
+    void addCustomer(Customer customer) {
+        if(open_tables > 0) {
+            customers.add(customer);
+            open_tables--;
+        }
+        else if(open_tables == 0) {
+            customers_waiting.add(customer);
+        }
+        else {
+            throw new IllegalStateException("Open Tables in restaurant may not be below zero!");
+        }
     }
+
+    int getCustomerCount() {
+        return customers.size();
+    }
+
+    int getCustomerWaitingCount() {
+        return customers_waiting.size();
+    }
+
+    void removeCustomer(Customer customer) {
+        if(customers.contains(customer)) {
+            customers.remove(customer);
+            
+            if(this.getCustomerWaitingCount() > 0)
+            {
+                customers.add(customers_waiting.getFirst());
+                customers_waiting.remove(customers_waiting.getFirst());
+            }
+            else
+                ++open_tables;
+        }
+        else
+            throw new IllegalArgumentException("Cannot remove a customer that is not in the restaurant!");
+    }
+
+    int getAvailableTables() {
+       return open_tables; 
+    }
+    
     
 }

@@ -11,4 +11,12 @@ package com.github.johnsonclayton.restaurant;
  */
 class MenuItem {
     private Ingredients ingredients;
+
+    public MenuItem() {
+        ingredients = new Ingredients();
+    }
+    
+    void addToIngredients(String ingredient_name) {
+        ingredients.add(new Ingredient(ingredient_name, 1));
+    }
 }

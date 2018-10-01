@@ -16,9 +16,9 @@ import static org.junit.Assert.*;
  *
  * @author clayt
  */
-public class CustomerTest {
+public class CartTest {
     
-    public CustomerTest() {
+    public CartTest() {
     }
     
     @BeforeClass
@@ -37,52 +37,41 @@ public class CustomerTest {
     public void tearDown() {
     }
 
+    /**
+     * Test of addItem method, of class Cart.
+     */
     @Test
-    public void testSomeMethod() {
+    public void testAddItem() {
+        System.out.println("addItem");
+        String item_name = "";
+        Cart instance = null;
+        instance.addItem(item_name);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of hasItemByName method, of class Customer.
+     * Test of checkout method, of class Cart.
+     */
+    @Test
+    public void testCheckout() {
+        System.out.println("checkout");
+        Cart instance = null;
+        instance.checkout();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of hasItemByName method, of class Cart.
      */
     @Test
     public void testHasItemByName() {
         System.out.println("hasItemByName");
         String item_name = "";
-        Customer instance = null;
+        Cart instance = null;
         boolean expResult = false;
         boolean result = instance.hasItemByName(item_name);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of compareTo method, of class Customer.
-     */
-    @Test
-    public void testCompareTo() {
-        System.out.println("compareTo");
-        Customer o = null;
-        Customer instance = null;
-        int expResult = 0;
-        int result = instance.compareTo(o);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of equals method, of class Customer.
-     */
-    @Test
-    public void testEquals() {
-        System.out.println("equals");
-        Object o = null;
-        Customer instance = null;
-        boolean expResult = false;
-        boolean result = instance.equals(o);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

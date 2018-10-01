@@ -5,12 +5,12 @@
  */
 package com.github.johnsonclayton.restaurant;
 
-import java.util.TreeSet;
+import java.util.ArrayList;
 
 /**
  *
  * @author clayt
  */
-class Ingredients extends TreeSet<Ingredient>{
+class Ingredients extends ArrayList<Ingredient>{
     
 }

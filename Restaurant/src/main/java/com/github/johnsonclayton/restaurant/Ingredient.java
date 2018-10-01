@@ -10,5 +10,10 @@ package com.github.johnsonclayton.restaurant;
  * @author clayt
  */
 class Ingredient {
-    
+    String name;
+    int count;
+    Ingredient(String _name, int _count) {
+        name = _name;
+        count = _count;
+    }
 }

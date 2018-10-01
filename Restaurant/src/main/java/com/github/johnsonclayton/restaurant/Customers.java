@@ -5,12 +5,11 @@
  */
 package com.github.johnsonclayton.restaurant;
 
-import java.util.TreeSet;
-
+import java.util.LinkedList;
 /**
  *
  * @author clayt
  */
-class Customers extends TreeSet<Customer>{
+class Customers extends LinkedList<Customer>{
     
 }

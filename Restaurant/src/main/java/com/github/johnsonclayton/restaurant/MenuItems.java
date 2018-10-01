@@ -5,12 +5,12 @@
  */
 package com.github.johnsonclayton.restaurant;
 
-import java.util.TreeSet;
+import java.util.LinkedList;
 
 /**
  *
  * @author clayt
  */
-class MenuItems extends TreeSet<MenuItem>{
+class MenuItems extends LinkedList<MenuItem>{
     
 }

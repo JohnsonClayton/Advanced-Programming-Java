@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.github.johnsonclayton.collections;
+package com.github.johnsonclayton.restaurant;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -17,8 +17,8 @@ import org.junit.runners.Suite;
  * @author clayt
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ItemsTest.class, ItemTest.class, CustomersTest.class, CollectionsAppTest.class, CartTest.class, RegistersTest.class, CustomerTest.class, MarketTest.class})
-public class CollectionsSuite {
+@Suite.SuiteClasses({com.github.johnsonclayton.restaurant.CustomersTest.class, com.github.johnsonclayton.restaurant.RestaurantTest.class, com.github.johnsonclayton.restaurant.IngredientTest.class, com.github.johnsonclayton.restaurant.MenuItemTest.class, com.github.johnsonclayton.restaurant.MenuItemsTest.class, com.github.johnsonclayton.restaurant.IngredientsTest.class, com.github.johnsonclayton.restaurant.CustomerTest.class})
+public class RestaurantSuite {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
