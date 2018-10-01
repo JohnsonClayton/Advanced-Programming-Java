@@ -1,5 +1,6 @@
 package mainApp.com.github.johnsonclayton.sheetmusicapp;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.JButton;
@@ -8,6 +9,8 @@ import javax.swing.JFrame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +31,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JComponent;
 
 
-public class mainApp extends JPanel implements ActionListener {
+public class mainApp extends JPanel implements ActionListener, MouseListener{
     protected JButton playButton, pauseButton, stopButton;
     protected CustomPlayer theDJ;
     protected Bar bar;
@@ -68,9 +71,15 @@ public class mainApp extends JPanel implements ActionListener {
         Note note4 = new Note("580", 1, 4, 2000, "C:\\Users\\clayt\\projects\\csci310\\SheetMusicApp\\src\\main\\java\\mainApp\\com\\github\\johnsonclayton\\sheetmusicapp\\note4.wav");
         testNotes.add(3, note4);
         bar.makeMeasure(1, testNotes);
+        
+        this.setBackground(Color.RED);
+        
+        addMouseListener(this);
     }
     
+    @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println(e.getActionCommand());
         if ("play".equals(e.getActionCommand())) {
             try {
                 //Play music
@@ -100,7 +109,7 @@ public class mainApp extends JPanel implements ActionListener {
         }
     }
     
-    private static void createAndShowGUI() throws MalformedURLException, IOException {
+    private static void createAndShowGUI() {
         JFrame frame = new JFrame("mainApp");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("mainApp");
@@ -110,19 +119,6 @@ public class mainApp extends JPanel implements ActionListener {
         newContentPane.setOpaque(true);
         frame.setContentPane(newContentPane);
         
-        String imgPath = "C:\\Users\\clayt\\projects\\csci310\\SheetMusicApp\\src\\main\\java\\mainApp\\com\\github\\johnsonclayton\\sheetmusicapp\\note1.wav";
-        URL url;
-        try {
-            url = new URL(imgPath);
-            BufferedImage backgroundImage = ImageIO.read(url);
-            frame.setContentPane(backgroundImage);
-
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(mainApp.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        //BufferedImage backgroundImage = ImageIO.read(url);
-        
         frame.pack();
         frame.setVisible(true);
     }
@@ -130,13 +126,34 @@ public class mainApp extends JPanel implements ActionListener {
     public static void main(String[] args) throws Exception {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    createAndShowGUI();
-                } catch (IOException ex) {
-                    Logger.getLogger(mainApp.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                createAndShowGUI();
             }
         });
+    }
+    
+    @Override
+    public void mousePressed(MouseEvent e) {
+        //System.out.println("Mouse clicked");
+    }
+    
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        //System.out.println("Mouse entered");
+    }
+    
+    @Override
+    public void mouseExited(MouseEvent e) {
+        //System.out.println("Mouse exited");
+    }
+    
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        //System.out.println("Mouse released");
+    }
+    
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        //System.out.println("Mouse clicked");
     }
 }
 
