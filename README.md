@@ -3,6 +3,6 @@
  - [Hissing Mic Kattis Problem](https://github.com/JohnsonClayton/csci310/blob/master/HissingMicrophoneSolution/src/main/java/HissingMic.java)
    - [Test Image](https://github.com/JohnsonClayton/csci310/blob/master/HissingMicrophoneSolution/src/main/java/com/github/johnsonclayton/hissingmicrophonesolution/HissingMic.PNG)
    -- Nice work!
- - Assn #3
+ - [Collections](https://github.com/JohnsonClayton/csci310/blob/master/Restaurant/src/main/java/com/github/johnsonclayton/restaurant/restauranttestspassed.PNG)
  - Assn #4
  - Assn #5
