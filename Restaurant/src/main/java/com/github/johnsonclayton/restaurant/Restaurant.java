@@ -32,6 +32,7 @@ public class Restaurant {
     }
 
     void addCustomer(Customer customer) {
+        customer.setRestaurant(this);
         if(open_tables > 0) {
             customers.add(customer);
             open_tables--;
@@ -71,6 +72,27 @@ public class Restaurant {
     int getAvailableTables() {
        return open_tables; 
     }
-    
-    
+
+    boolean hasIngredientsFor(MenuItem menu_item) {
+        Ingredients ingredientsFound = new Ingredients();
+        for (Ingredient ingredient : menu_item.getIngredients()) {
+            boolean found = false;
+            for (Ingredient ingredientStocked : ingredientsInStock) {
+                if(ingredientStocked.name.equals(ingredient.name)) {
+                    found = true;
+                    ingredientsFound.add(ingredientStocked);
+                }
+            }
+            if(!found) return false;
+        }
+        
+        for (Ingredient ingredient : ingredientsFound) {
+            if(ingredient.count <= 1) {
+                ingredientsInStock.remove(ingredient);
+            }
+            else
+                --ingredient.count;
+        }
+        return true;
+    }    
 }

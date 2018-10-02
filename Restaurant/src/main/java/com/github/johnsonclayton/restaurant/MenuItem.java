@@ -5,18 +5,29 @@
  */
 package com.github.johnsonclayton.restaurant;
 
+
 /**
  *
  * @author clayt
  */
 class MenuItem {
     private Ingredients ingredients;
+    private String name;
 
-    public MenuItem() {
+    public MenuItem(String _name) {
         ingredients = new Ingredients();
+        name = _name;
     }
     
     void addToIngredients(String ingredient_name) {
         ingredients.add(new Ingredient(ingredient_name, 1));
+    }
+
+    Ingredients getIngredients() {
+        return ingredients;
+    }
+
+    String getName() {
+        return name;
     }
 }

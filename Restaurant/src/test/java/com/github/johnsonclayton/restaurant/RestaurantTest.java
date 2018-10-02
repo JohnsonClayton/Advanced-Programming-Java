@@ -36,22 +36,10 @@ public class RestaurantTest {
     @After
     public void tearDown() {
     }
-
-    /**
-     * Test of main method, of class Restaurant.
-     */
-    @Test
-    public void testMain() throws Exception {
-        System.out.println("main");
-        String[] args = null;
-        Restaurant.main(args);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
     
     @Test
     public void testAddCustomers() {
-        MenuItem fish_sandwhich = new MenuItem();
+        MenuItem fish_sandwhich = new MenuItem("fish sandwhich");
         fish_sandwhich.addToIngredients("fish");
         fish_sandwhich.addToIngredients("bread");
         
@@ -86,7 +74,7 @@ public class RestaurantTest {
     
     @Test(expected = IllegalArgumentException.class)
     public void testRemoveCustomers() {
-        MenuItem fish_sandwhich = new MenuItem();
+        MenuItem fish_sandwhich = new MenuItem("fish sandwhich");
         fish_sandwhich.addToIngredients("fish");
         fish_sandwhich.addToIngredients("bread");
         
@@ -133,6 +121,34 @@ public class RestaurantTest {
         assertEquals(restaurant.getAvailableTables(), 2);
 
         restaurant.removeCustomer(chris);
+        
+    }
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void testOrdering() {
+        MenuItem fish_sandwhich = new MenuItem("fish sandwhich");
+        fish_sandwhich.addToIngredients("fish");
+        fish_sandwhich.addToIngredients("bread");
+        
+        MenuItems menu_items = new MenuItems();
+        menu_items.add(fish_sandwhich);
+        
+        Ingredient fish = new Ingredient("fish", 1);
+        Ingredient bread = new Ingredient("bread", 2);
+        Ingredients ingredients = new Ingredients();
+        ingredients.add(fish);
+        ingredients.add(bread);
+        
+        Restaurant restaurant = new Restaurant(menu_items, 2, ingredients);
+        
+        Customer alice = new Customer("alice");
+        Customer bob = new Customer("bob");
+        
+        restaurant.addCustomer(alice);
+        restaurant.addCustomer(bob);
+        
+        alice.order(fish_sandwhich);
+        bob.order(fish_sandwhich);
         
     }
 }
