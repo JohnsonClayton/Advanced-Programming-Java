@@ -39,7 +39,7 @@ public class RestaurantTest {
     
     @Test
     public void testAddCustomers() {
-        MenuItem fish_sandwhich = new MenuItem("fish sandwhich");
+        MenuItem fish_sandwhich = new MenuItem("fish sandwhich", 6);
         fish_sandwhich.addToIngredients("fish");
         fish_sandwhich.addToIngredients("bread");
         
@@ -54,8 +54,8 @@ public class RestaurantTest {
         
         Restaurant restaurant = new Restaurant(menu_items, 10, ingredients);
         
-        Customer alice = new Customer("alice");
-        Customer bob = new Customer("bob");
+        Customer alice = new Customer("alice", 10);
+        Customer bob = new Customer("bob", 10);
         
         restaurant.addCustomer(alice);
         restaurant.addCustomer(bob);
@@ -74,7 +74,7 @@ public class RestaurantTest {
     
     @Test(expected = IllegalArgumentException.class)
     public void testRemoveCustomers() {
-        MenuItem fish_sandwhich = new MenuItem("fish sandwhich");
+        MenuItem fish_sandwhich = new MenuItem("fish sandwhich", 6);
         fish_sandwhich.addToIngredients("fish");
         fish_sandwhich.addToIngredients("bread");
         
@@ -89,9 +89,9 @@ public class RestaurantTest {
         
         Restaurant restaurant = new Restaurant(menu_items, 2, ingredients);
         
-        Customer alice = new Customer("alice");
-        Customer bob = new Customer("bob");
-        Customer chris = new Customer("chris");
+        Customer alice = new Customer("alice", 10);
+        Customer bob = new Customer("bob", 10);
+        Customer chris = new Customer("chris", 10);
         
         restaurant.addCustomer(alice);
         restaurant.addCustomer(bob);
@@ -126,7 +126,7 @@ public class RestaurantTest {
     
     @Test (expected = IllegalArgumentException.class)
     public void testOrdering() {
-        MenuItem fish_sandwhich = new MenuItem("fish sandwhich");
+        MenuItem fish_sandwhich = new MenuItem("fish sandwhich", 6);
         fish_sandwhich.addToIngredients("fish");
         fish_sandwhich.addToIngredients("bread");
         
@@ -141,8 +141,8 @@ public class RestaurantTest {
         
         Restaurant restaurant = new Restaurant(menu_items, 2, ingredients);
         
-        Customer alice = new Customer("alice");
-        Customer bob = new Customer("bob");
+        Customer alice = new Customer("alice", 10);
+        Customer bob = new Customer("bob", 3);
         
         restaurant.addCustomer(alice);
         restaurant.addCustomer(bob);
@@ -150,5 +150,39 @@ public class RestaurantTest {
         alice.order(fish_sandwhich);
         bob.order(fish_sandwhich);
         
+    }
+    
+    @Test
+    public void testPayingForFood() {
+        MenuItem fish_sandwhich = new MenuItem("fish sandwhich", 6);
+        fish_sandwhich.addToIngredients("fish");
+        fish_sandwhich.addToIngredients("bread");
+        
+        MenuItems menu_items = new MenuItems();
+        menu_items.add(fish_sandwhich);
+        
+        Ingredient fish = new Ingredient("fish", 20);
+        Ingredient bread = new Ingredient("bread", 40);
+        Ingredients ingredients = new Ingredients();
+        ingredients.add(fish);
+        ingredients.add(bread);
+        
+        Restaurant restaurant = new Restaurant(menu_items, 2, ingredients);
+        
+        Customer alice = new Customer("alice", 10);
+        Customer bob = new Customer("bob", 3);
+        
+        restaurant.addCustomer(alice);
+        restaurant.addCustomer(bob);
+        
+        alice.order(fish_sandwhich);
+        bob.order(fish_sandwhich);
+        
+        assertEquals(restaurant.customers_dishwashing.size(), 0);
+        
+        alice.payForMeal();
+        bob.payForMeal();
+        
+        assertEquals(restaurant.customers_dishwashing.size(), 1);
     }
 }

@@ -15,6 +15,7 @@ public class Restaurant {
     private int open_tables;
     private Ingredients ingredientsInStock;
     private Customers customers_waiting;
+    public Customers customers_dishwashing;
     
     public Restaurant(MenuItems _menu_items, int total_tables, Ingredients _ingredientsInStock) {
         customers = new Customers();
@@ -22,6 +23,7 @@ public class Restaurant {
         open_tables = total_tables;
         ingredientsInStock = _ingredientsInStock;
         customers_waiting = new Customers();
+        customers_dishwashing = new Customers();
     }
     
     public static void main(String []args) throws Exception{
