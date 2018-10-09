@@ -48,4 +48,27 @@ public class ListSpeedTestTest {
         assertTrue(result.startsWith("array"));
     }
     
+    @Test
+    public void testCollectionsSortSerialSpeed() {
+        ListSpeedTest test = new ListSpeedTest(
+                new SerializedAction(new SortAction()), 
+                1_000_000);
+        test.start();
+        test.waitTilFinish();
+        String result = test.outcome();
+        System.out.println(result);
+        assertTrue(result.startsWith("array"));
+    }
+    
+    @Test
+    public void testCollectionsRandomizeSpeed() {
+        ListSpeedTest test = new ListSpeedTest();
+        test.setAction(new RandomizeAction(1_000_000));
+        test.start();
+        test.waitTilFinish();
+        String result = test.outcome();
+        System.out.println(result);
+        assertTrue(result.startsWith("array"));
+    }
+    
 }
