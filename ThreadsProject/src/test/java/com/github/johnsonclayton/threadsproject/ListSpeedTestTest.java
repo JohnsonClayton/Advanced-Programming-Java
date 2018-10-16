@@ -71,4 +71,16 @@ public class ListSpeedTestTest {
         assertTrue(result.startsWith("array"));
     }
     
+    @Test
+    public void testCollectionsLambda() {
+        ListSpeedTest test = new ListSpeedTest();
+        test.setAction((list) -> {
+            list.get(list.size() - 1); 
+        });
+        test.start();
+        test.waitTilFinish();
+        String result = test.outcome();
+        System.out.println(result);
+        assertTrue(result.startsWith("array"));
+    }
 }
