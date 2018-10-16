@@ -6,5 +6,5 @@
  - [Collections](https://github.com/JohnsonClayton/csci310/blob/master/Restaurant/src/main/java/com/github/johnsonclayton/restaurant/Restaurant.java)
     - [Test Image](https://github.com/JohnsonClayton/csci310/blob/master/Restaurant/src/main/java/com/github/johnsonclayton/restaurant/restauranttestspassed.PNG)
  - [Threads](https://github.com/JohnsonClayton/csci310/blob/master/MarketTrading/src/main/java/com/github/johnsonclayton/markettrading/Market.java)
-    - [Test Results](https://github.com/JohnsonClayton/csci310/blob/master/MarketTrading/test_results.png)
+    - [Test Results](https://github.com/JohnsonClayton/csci310/blob/master/MarketTrading/test_results.PNG)
  - Assn #5
