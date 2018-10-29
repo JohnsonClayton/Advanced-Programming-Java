@@ -9,5 +9,5 @@
     - [Test Results](https://github.com/JohnsonClayton/csci310/blob/master/MarketTrading/test_results.PNG)
  - [SQLite](https://github.com/JohnsonClayton/csci310/blob/master/sqlite/src/main/java/com/github/johnsonclayton/sqlite/App.java)
     - [Test Results](https://github.com/JohnsonClayton/csci310/blob/master/sqlite/testspassed.PNG)
-    - Retrieving data demonstrated in tests found [here](https://github.com/JohnsonClayton/csci310/blob/master/sqlite/src/test/java/com/github/johnsonclayton/AppTest.java)
+    - Retrieving data demonstrated in tests found [here](https://github.com/JohnsonClayton/csci310/blob/master/sqlite/src/test/java/com/github/johnsonclayton/sqlite/AppTest.java)
  - Assn #5
