@@ -7,6 +7,7 @@
     - [Test Image](https://github.com/JohnsonClayton/csci310/blob/master/Restaurant/src/main/java/com/github/johnsonclayton/restaurant/restauranttestspassed.PNG)
  - [Threads](https://github.com/JohnsonClayton/csci310/blob/master/MarketTrading/src/main/java/com/github/johnsonclayton/markettrading/Market.java)
     - [Test Results](https://github.com/JohnsonClayton/csci310/blob/master/MarketTrading/test_results.PNG)
- - [SQLite](https://github.com/JohnsonClayton/csci310/blob/master/sqlite/src/main/java/com/github/johnsonclayton/app.java)
+ - [SQLite](https://github.com/JohnsonClayton/csci310/blob/master/sqlite/src/main/java/com/github/johnsonclayton/App.java)
     - [Test Results](https://github.com/JohnsonClayton/csci310/blob/master/sqlite/testspassed.PNG)
+    - Retrieving data demonstrated in tests found [here](https://github.com/JohnsonClayton/csci310/blob/master/sqlite/src/test/java/com/github/johnsonclayton/AppTest.java)
  - Assn #5
