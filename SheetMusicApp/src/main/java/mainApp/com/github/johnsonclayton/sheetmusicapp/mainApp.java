@@ -1,62 +1,68 @@
 package mainApp.com.github.johnsonclayton.sheetmusicapp;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Rectangle;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.sound.sampled.AudioFormat;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.JComponent;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JToolBar;
+
 
 
 public class mainApp extends JPanel implements ActionListener, MouseListener{
-    protected JButton playButton, pauseButton, stopButton;
+    private static JMenuBar menuBar;
+    private JMenu menu;
+    private JMenuItem menuItem;
+    
+    private JToolBar toolBar;
+    
     protected CustomPlayer theDJ;
     protected Bar bar;
     
     public mainApp() {
-        playButton = new JButton("Play");
-        playButton.setActionCommand("play");
-        playButton.addActionListener(this);
-        playButton.setToolTipText("Start the music");
         
-        pauseButton = new JButton("Pause");
-        pauseButton.setActionCommand("pause");
-        pauseButton.addActionListener(this);
-        pauseButton.setToolTipText("Pause the music");
+        //Toolbar
+        toolBar = new JToolBar("Editing ToolBar");
+        //toolBar.setFloatable(false);
         
-        stopButton = new JButton("Stop");
-        stopButton.setActionCommand("stop");
-        stopButton.addActionListener(this);
-        stopButton.setToolTipText("Stop the music");
+        addButtons(toolBar);
         
-        add(playButton);
-        add(pauseButton);
-        add(stopButton);
+        toolBar.setOrientation(JToolBar.VERTICAL);
+        toolBar.setVisible(true);
+        add(toolBar, BorderLayout.PAGE_START);
+        
+        //Menu
+        menuBar = new JMenuBar();
+        
+        menu = new JMenu("Test JMenu 1");
+        
+        menuItem = new JMenuItem("Menu Item 1");
+        menu.add(menuItem);
+        
+        menuItem = new JMenuItem("Menu Item 2");
+        menu.add(menuItem);
+        
+        menuItem = new JMenuItem("Menu Item 3");
+        menu.add(menuItem);
+        
+        menuBar.add(menu);
+        
+        
+        
         
         theDJ = new CustomPlayer();
         
@@ -88,13 +94,7 @@ public class mainApp extends JPanel implements ActionListener, MouseListener{
                 //theDJ.playSingle("C:\\Users\\clayt\\projects\\csci310\\SheetMusicApp\\src\\main\\java\\mainApp\\xavier.wav");
                 //theDJ.playSingle("C:\\Users\\clayt\\projects\\csci310\\SheetMusicApp\\src\\main\\java\\mainApp\\com\\github\\johnsonclayton\\sheetmusicapp\\snap.wav");
                 theDJ.playBar(bar);
-            } catch (UnsupportedAudioFileException ex) {
-                Logger.getLogger(mainApp.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(mainApp.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (LineUnavailableException ex) {
-                Logger.getLogger(mainApp.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InterruptedException ex) {
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException | InterruptedException ex) {
                 Logger.getLogger(mainApp.class.getName()).log(Level.SEVERE, null, ex);
             }
             System.out.println("Music playing");
@@ -117,9 +117,21 @@ public class mainApp extends JPanel implements ActionListener, MouseListener{
         frame.setTitle("mainApp");
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
+        
         mainApp newContentPane = new mainApp();
         newContentPane.setOpaque(true);
+
+        //frame.add(toolBar, BorderLayout.PAGE_START);
+        //newContentPane.add(toolBar, BorderLayout.PAGE_START);
+        //frame.add(toolBar, BorderLayout.PAGE_START);
+        
+        frame.setJMenuBar(menuBar);
+
         frame.setContentPane(newContentPane);
+
+        
+
+
         
         frame.pack();
         frame.setVisible(true);
@@ -167,5 +179,27 @@ public class mainApp extends JPanel implements ActionListener, MouseListener{
         g.drawLine(175, 300, 1750, 300);
         g.drawLine(175, 350, 1750, 350);
         g.drawLine(175, 400, 1750, 400);
+    }
+
+    private void addButtons(JToolBar toolBar) {
+        JButton button = null;
+        
+        button = new JButton("Play");
+        button.addActionListener(this);
+        button.setActionCommand("play");
+        
+        toolBar.add(button);
+        
+        button = new JButton("Pause");
+        button.addActionListener(this);
+        button.setActionCommand("pause");
+        
+        toolBar.add(button);
+        
+        button = new JButton("Stop");
+        button.addActionListener(this);
+        button.setActionCommand("stop");
+        
+        toolBar.add(button);
     }
 }
