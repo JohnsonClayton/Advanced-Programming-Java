@@ -28,28 +28,45 @@ class MainController extends JFrame{
         
         //Create Panels
         mainPanel = new MainContentPanel();
-        toolbar = new PlayBackToolBar();        
+        toolbar = new PlayBackToolBar();  
         
-        toolbar.setCommandListener((int cmd) -> {
-            switch(cmd) {
-                case Util.PLAY_MUSIC:
-                    System.out.println("Play");
-                    System.out.println("Width: " + getWidth());
-                    System.out.println("Height: " + getHeight());
-                    break;
-                case Util.PAUSE_MUSIC:
-                    System.out.println("Pause");
-                    break;
-                case Util.STOP_MUSIC:
-                    System.out.println("Stop");
-                    break;
-                case Util.ADD_MEASURE:
-                    mainPanel.addMeasure();
-                    mainPanel.repaint();
-                    break;
-                default:
-                    System.out.println("Unknown command!");
+        mainPanel.setCommandListener(new CommandListener() {
+            @Override
+            public void commandRequested(int cmd) {}
+
+            @Override
+            public void commandRequested(int cmd, Rectangle rect) {
+                //Handle the new note added
             }
+            
+        });
+        
+        toolbar.setCommandListener(new CommandListener() {
+            @Override
+            public void commandRequested(int cmd) {
+                switch(cmd) {
+                    case Util.PLAY_MUSIC:
+                        System.out.println("Play");
+                        System.out.println("Width: " + getWidth());
+                        System.out.println("Height: " + getHeight());
+                        break;
+                    case Util.PAUSE_MUSIC:
+                        System.out.println("Pause");
+                        break;
+                    case Util.STOP_MUSIC:
+                        System.out.println("Stop");
+                        break;
+                    case Util.ADD_MEASURE:
+                        mainPanel.addMeasure();
+                        mainPanel.repaint();
+                        break;
+                    default:
+                        System.out.println("Unknown command!");
+                }
+            }
+
+            @Override
+            public void commandRequested(int cmd, Rectangle rect) {}
         });
         
         //Add panels

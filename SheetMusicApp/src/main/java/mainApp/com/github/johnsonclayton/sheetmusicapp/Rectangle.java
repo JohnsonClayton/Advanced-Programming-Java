@@ -5,17 +5,20 @@ package mainApp.com.github.johnsonclayton.sheetmusicapp;
 class Rectangle {
         int x, y,width, height; //Where x1, y1 are the top-left coords and x2, y2 are bottom-right
         boolean filled;
-        Rectangle(int _x, int _y, int _width, int _height) {
+        int note_val;
+        
+        Rectangle(int _x, int _y, int _width, int _height, int _note_val) {
             x = _x;
             y = _y;
             width = _width;
             height = _height;
             filled = false;
+            note_val = _note_val;
         }
         
-        public boolean containsClick(int clicked_x, int clicked_y) {
-            int clickPadding = 25;
-            if((x - clickPadding <= clicked_x) && (y <= clicked_y) && (x + width + clickPadding >= clicked_x) && (y + height >= clicked_y)) {
+        public boolean containsMouse(int mouse_x, int mouse_y) {
+            int clickPadding = 40;
+            if((x - clickPadding <= mouse_x) && (y <= mouse_y) && (x + width + clickPadding >= mouse_x) && (y + height >= mouse_y)) {
                 System.out.println("clicked inside");
                 return true;
             }

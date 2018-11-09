@@ -11,4 +11,5 @@ package mainApp.com.github.johnsonclayton.sheetmusicapp;
  */
 public interface CommandListener {
     public void commandRequested(int cmd);
+    public void commandRequested(int cmd, Rectangle rect);
 }
