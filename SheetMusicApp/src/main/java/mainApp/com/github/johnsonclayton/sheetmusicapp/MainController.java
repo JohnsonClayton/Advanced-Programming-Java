@@ -43,6 +43,10 @@ class MainController extends JFrame{
                 case Util.STOP_MUSIC:
                     System.out.println("Stop");
                     break;
+                case Util.ADD_MEASURE:
+                    mainPanel.addMeasure();
+                    mainPanel.repaint();
+                    break;
                 default:
                     System.out.println("Unknown command!");
             }

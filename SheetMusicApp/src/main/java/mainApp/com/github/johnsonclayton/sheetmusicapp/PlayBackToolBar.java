@@ -21,6 +21,8 @@ class PlayBackToolBar extends JPanel{
     JButton playButton;
     JButton pauseButton;
     JButton stopButton;
+    JButton newMeasureButton;
+    
     CommandListener cmdListener;
     
     PlayBackToolBar() {
@@ -28,6 +30,8 @@ class PlayBackToolBar extends JPanel{
         playButton = new JButton("Play");
         pauseButton = new JButton("Pause");
         stopButton = new JButton("Stop");
+        newMeasureButton = new JButton("New Measure");
+        
         
         //Add listeners for toolbar
         playButton.addActionListener(new ActionListener() {
@@ -51,10 +55,18 @@ class PlayBackToolBar extends JPanel{
             }
         });
         
+        newMeasureButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cmdListener.commandRequested(Util.ADD_MEASURE);
+            }
+        });
+        
         setLayout(new FlowLayout(FlowLayout.LEFT));
         add(playButton);
         add(pauseButton);
         add(stopButton);
+        add(newMeasureButton);
     }
 
     public void setCommandListener(CommandListener commandListener) {

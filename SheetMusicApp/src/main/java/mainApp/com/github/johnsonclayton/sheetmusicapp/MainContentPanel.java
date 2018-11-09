@@ -19,12 +19,14 @@ import javax.swing.JPanel;
  */
 class MainContentPanel extends JPanel{
     ArrayList<Rectangle> rectangles;
+    ArrayList<Measure> measures;
     MainContentPanel() {
         setLayout(new BorderLayout());
         rectangles = new ArrayList<Rectangle>();
+        measures = new ArrayList<Measure>();
         
         initRectangles();
-     
+        
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -78,31 +80,158 @@ class MainContentPanel extends JPanel{
     }
 
     public void paintBar(Graphics g) {
-        //Width of 420 (blaze it)
-        int x = 100, y = 100, width = 420, height = 50;
-        g.drawLine(x, y, x+width, y);
-        y+= height;
-        g.drawLine(x, y, x+width, y);
-        y+= height;
-        g.drawLine(x, y, x+width, y);
-        y+= height;
-        g.drawLine(x, y, x+width, y);
-        y+= height;
-        g.drawLine(x, y, x+width, y);
+        int size = measures.size();
+        int     width = 420, 
+                height = 50, 
+                init_x = 100, 
+                init_y = 100,
+                measure_separation = 650,
+                x_counter = 0,
+                x,
+                y;
+        
+        
+        for(int i = 0, row = 0; i <= size; i++, x_counter++) {
+            //Keeps track of how many rows
+            if(i != 0 && i % 4 == 0) {
+                row++;
+                x = init_x;
+                x_counter = 0;
+            }
+            else {
+                x = init_x + (x_counter * width);
+            }
+            y = init_y + (row * measure_separation);
+
+            //Vertical Bars at Start and End
+            g.drawLine(x, y, x, y + height * 10);
+            g.drawLine(x + width, y, x + width, y + height * 10);
+
+            //Horizontal Bars
+            g.drawLine(x, y, x+width, y);
+            y+= height;
+            g.drawLine(x, y, x+width, y);
+            y+= height;
+            g.drawLine(x, y, x+width, y);
+            y+= height;
+            g.drawLine(x, y, x+width, y);
+            y+= height;
+            g.drawLine(x, y, x+width, y);
+
+            y+= height;
+            y+= height;
+
+            g.drawLine(x, y, x+width, y);
+            y+= height;
+            g.drawLine(x, y, x+width, y);
+            y+= height;
+            g.drawLine(x, y, x+width, y);
+            y+= height;
+            g.drawLine(x, y, x+width, y);
+            y+= height;
+            g.drawLine(x, y, x+width, y);
+        }
     }
     
     private void draw(Graphics g, Rectangle rect) {
         if(rect.filled) {
             g.fillOval(rect.x - 12, rect.y - 12, rect.width * 2, rect.height * 2 - 10); //For appearing to take up a whole space
+            //g.drawLine(rect.x - 12, rect.y + (rect.height / 2), rect.x - 12, (rect.y + (rect.height / 2) ) + 200);
+            g.fillRect(rect.x - 12, rect.y + (rect.height / 2), 5, 100);
+            //g.drawLine(rect.x, 200, 200);
         }
         else {
-            g.drawRect(rect.x, rect.y, rect.width, rect.height);
+            //g.drawRect(rect.x, rect.y, rect.width, rect.height);
         }
     }
 
     private void initRectangles() {
-        int x = 150, x_const = x, y = 90, y_const = y, width = 25, x_spacing = 100, height = 25;
+        int size = measures.size();
+        int     x = 150, 
+                x_const = x, 
+                y = 65, 
+                y_const = y, 
+                width = 25, 
+                x_spacing = 100, 
+                height = 25;
         
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        
+        
+        x+=x_spacing;
+        y = y_const;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
         rectangles.add(new Rectangle(x, y, width, height));
         y+= height;
         rectangles.add(new Rectangle(x, y, width, height));
@@ -140,6 +269,34 @@ class MainContentPanel extends JPanel{
         rectangles.add(new Rectangle(x, y, width, height));
         y+= height;
         rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
         
         x+=x_spacing;
         y = y_const;
@@ -160,10 +317,6 @@ class MainContentPanel extends JPanel{
         rectangles.add(new Rectangle(x, y, width, height));
         y+= height;
         rectangles.add(new Rectangle(x, y, width, height));
-        
-        x+=x_spacing;
-        y = y_const;
-        rectangles.add(new Rectangle(x, y, width, height));
         y+= height;
         rectangles.add(new Rectangle(x, y, width, height));
         y+= height;
@@ -180,5 +333,22 @@ class MainContentPanel extends JPanel{
         rectangles.add(new Rectangle(x, y, width, height));
         y+= height;
         rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+        y+= height;
+        rectangles.add(new Rectangle(x, y, width, height));
+    }
+
+    void addMeasure() {
+        measures.add(new Measure());
+        System.out.println("Measure added");
     }
 }

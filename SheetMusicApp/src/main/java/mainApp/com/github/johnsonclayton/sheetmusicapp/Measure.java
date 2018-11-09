@@ -9,9 +9,9 @@ package mainApp.com.github.johnsonclayton.sheetmusicapp;
  *
  * @author clayt
  */
-public class Util {
-    public static final int PLAY_MUSIC = 0;
-    public static final int PAUSE_MUSIC = 1;
-    public static final int STOP_MUSIC = 2;
-    public static final int ADD_MEASURE = 3;
+class Measure { 
+    Measure() {
+        
+    }
+    
 }
