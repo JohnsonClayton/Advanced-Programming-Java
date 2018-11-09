@@ -14,7 +14,8 @@ class Rectangle {
         }
         
         public boolean containsClick(int clicked_x, int clicked_y) {
-            if((x <= clicked_x) && (y <= clicked_y) && (x + width >= clicked_x) && (y + height >= clicked_y)) {
+            int clickPadding = 25;
+            if((x - clickPadding <= clicked_x) && (y <= clicked_y) && (x + width + clickPadding >= clicked_x) && (y + height >= clicked_y)) {
                 System.out.println("clicked inside");
                 return true;
             }

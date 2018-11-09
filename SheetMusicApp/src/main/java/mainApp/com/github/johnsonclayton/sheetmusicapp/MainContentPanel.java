@@ -26,9 +26,7 @@ class MainContentPanel extends JPanel{
         rectangles = new ArrayList<Rectangle>();
         measures = new ArrayList<Measure>();
         panelHeight = 1500;
-        
-        initRectangles();
-        
+                
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -92,6 +90,14 @@ class MainContentPanel extends JPanel{
                 x,
                 y;
         
+        int     bx = 150, 
+                bx_const = bx, 
+                by = 65, 
+                by_const = by, 
+                bwidth = 25, 
+                bx_spacing = 100, 
+                bheight = 25;
+        
         
         for(int i = 0, row = 0; i <= size; i++, x_counter++) {
             //Keeps track of how many rows
@@ -106,7 +112,14 @@ class MainContentPanel extends JPanel{
             y = init_y + (row * measure_separation);
 
             
+            System.out.println("---------------------");
+            System.out.println("x : " + x);
+            System.out.println("y : " + y);
+            System.out.println("---------------------");
+
+            addMeasureHitBoxes(x + 50, bx_const, y - 35, y - 35, bwidth, bx_spacing, bheight);
             drawLines(g, x, y, width, height);
+            
         }
     }
     
@@ -114,23 +127,15 @@ class MainContentPanel extends JPanel{
         if(rect.filled) {
             g.fillOval(rect.x - 12, rect.y - 12, rect.width * 2, rect.height * 2 - 10); //For appearing to take up a whole space
             //g.drawLine(rect.x - 12, rect.y + (rect.height / 2), rect.x - 12, (rect.y + (rect.height / 2) ) + 200);
-            g.fillRect(rect.x - 12, rect.y + (rect.height / 2), 5, 100);
+            g.fillRect(rect.x - 12, rect.y + (rect.height / 2) - 5, 5, 100);
             //g.drawLine(rect.x, 200, 200);
         }
         else {
             //g.drawRect(rect.x, rect.y, rect.width, rect.height);
         }
     }
-
-    private void initRectangles() {
-        int size = measures.size();
-        int     x = 150, 
-                x_const = x, 
-                y = 65, 
-                y_const = y, 
-                width = 25, 
-                x_spacing = 100, 
-                height = 25;
+    
+    void addMeasureHitBoxes(int x, int x_const, int y, int y_const, int width, int x_spacing, int height) {
         
         rectangles.add(new Rectangle(x, y, width, height));
         y+= height;
