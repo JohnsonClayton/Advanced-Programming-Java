@@ -6,14 +6,18 @@ class Rectangle {
         int x, y,width, height; //Where x1, y1 are the top-left coords and x2, y2 are bottom-right
         boolean filled;
         int note_val;
+        int measure_id;
+        int beat;
         
-        Rectangle(int _x, int _y, int _width, int _height, int _note_val) {
+        Rectangle(int _x, int _y, int _width, int _height, int _note_val, int _id, int _beat) {
             x = _x;
             y = _y;
             width = _width;
             height = _height;
             filled = false;
             note_val = _note_val;
+            measure_id = _id;
+            beat = _beat;
         }
         
         public boolean containsMouse(int mouse_x, int mouse_y) {

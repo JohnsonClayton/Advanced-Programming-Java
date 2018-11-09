@@ -12,7 +12,23 @@ import java.util.ArrayList;
  * @author clayt
  */
 public class Bar {
-    private int length;
+    private ArrayList<Measure> measures;
+    
+    Bar() {
+        measures = new ArrayList<>();
+    }
+    
+    void addMeasure() {
+        measures.add(new Measure());
+    }
+    
+    void addNoteAtHitBox(Rectangle rect) {
+        if(rect.measure_id < measures.size()) {
+            measures.get(rect.measure_id).addNote(rect);
+        }
+    }
+    
+    /*private int length;
     private ArrayList<Note> notes;
     private int measureCount;
     
@@ -29,7 +45,11 @@ public class Bar {
     
     public ArrayList<Note> getNotes() {
         return notes;
-    }
+    }*/
+
+    
+
+    
     
     
 }

@@ -15,6 +15,8 @@ import javax.swing.JScrollPane;
  * @author clayt
  */
 class MainController extends JFrame{
+    Bar bar;
+    
     //Panels inside MainWindow
     MainContentPanel mainPanel;
     PlayBackToolBar toolbar;
@@ -25,6 +27,9 @@ class MainController extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(500, 600));
         setExtendedState(JFrame.MAXIMIZED_BOTH);     
+        
+        //Create Music Playing Objects
+        bar = new Bar();
         
         //Create Panels
         mainPanel = new MainContentPanel();
@@ -37,11 +42,14 @@ class MainController extends JFrame{
             @Override
             public void commandRequested(int cmd, Rectangle rect) {
                 //Handle the new note added
+                bar.addNoteAtHitBox(rect);
+                
+                System.out.println("Note received: " + rect.note_val);
             }
             
         });
         
-        toolbar.setCommandListener(new CommandListener() {
+        toolbar.setCommandListener(new CommandListener(bar) {
             @Override
             public void commandRequested(int cmd) {
                 switch(cmd) {
@@ -58,6 +66,7 @@ class MainController extends JFrame{
                         break;
                     case Util.ADD_MEASURE:
                         mainPanel.addMeasure();
+                        bar.addMeasure();
                         mainPanel.repaint();
                         break;
                     default:
@@ -75,5 +84,9 @@ class MainController extends JFrame{
         
         pack();
         setVisible(true);
+    }
+    
+    public void testMe() {
+        System.out.println("hello!!!!");
     }
 }

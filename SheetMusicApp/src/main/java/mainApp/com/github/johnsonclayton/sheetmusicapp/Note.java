@@ -10,7 +10,13 @@ package mainApp.com.github.johnsonclayton.sheetmusicapp;
  * @author clayt
  */
 public class Note {
-    private String filename;
+    public int value;
+    
+    Note(int _value) {
+        value = _value;
+    }
+    
+    /*private String filename;
     private String notename;
     private int measure;
     private int beat;
@@ -64,6 +70,6 @@ public class Note {
 
     public boolean isPlaying() {
         return isPlaying;
-    }
+    }*/
     
 }

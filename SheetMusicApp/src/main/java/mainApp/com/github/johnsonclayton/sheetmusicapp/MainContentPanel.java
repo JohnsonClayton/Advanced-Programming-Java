@@ -6,7 +6,6 @@
 package mainApp.com.github.johnsonclayton.sheetmusicapp;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -26,8 +25,8 @@ class MainContentPanel extends JPanel{
     
     MainContentPanel() {
         setLayout(new BorderLayout());
-        rectangles = new ArrayList<Rectangle>();
-        measures = new ArrayList<Measure>();
+        rectangles = new ArrayList<>();
+        measures = new ArrayList<>();
         panelHeight = 1500;
                 
         addMouseListener(new MouseListener() {
@@ -38,6 +37,7 @@ class MainContentPanel extends JPanel{
                     if(rect.containsMouse(e.getX(), e.getY())) {
                         
                         //Send command that note was clicked
+                        commandListener.commandRequested(4, rect);
                         
                         rect.filled = !rect.filled;
                         
@@ -112,7 +112,7 @@ class MainContentPanel extends JPanel{
                 bheight = 25;
         
         
-        for(int i = 0, row = 0; i <= size; i++, x_counter++) {
+        for(int i = 0, row = 0; i < size; i++, x_counter++) {
             //Keeps track of how many rows
             if(i != 0 && i % 4 == 0) {
                 row++;
@@ -124,7 +124,7 @@ class MainContentPanel extends JPanel{
             }
             y = init_y + (row * measure_separation);
 
-            addMeasureHitBoxes(x + 50, bx_const, y - 35, y - 35, bwidth, bx_spacing, bheight);
+            addMeasureHitBoxes(x + 50, bx_const, y - 35, y - 35, bwidth, bx_spacing, bheight, i);
             drawLines(g, x, y, width, height);
             
         }
@@ -147,292 +147,87 @@ class MainContentPanel extends JPanel{
         }
     }
     
-    void addMeasureHitBoxes(int x, int x_const, int y, int y_const, int width, int x_spacing, int height) {
-        
+    void addMeasureHitBoxes(int x, int x_const, int y, int y_const, int width, int x_spacing, int height, int measure_id) {
         int currentNoteVal = Util.G_4;
-        
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        
-        currentNoteVal = Util.G_4;
-        x+=x_spacing;
-        y = y_const;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        
-        currentNoteVal = Util.G_4;
-        x+=x_spacing;
-        y = y_const;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        
-        currentNoteVal = Util.G_4;
-        x+=x_spacing;
-        y = y_const;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
-        y+= height;
-        currentNoteVal--;
-        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal));
+
+        for(int i = 0; i < 4;   i++, 
+                                x+=x_spacing,
+                                y = y_const) {
+            //Add new beat hit boxes
+            addBeatHitBoxes(x, y, width, height, currentNoteVal, measure_id, i);
+        }
     }
 
+    void addBeatHitBoxes(int x, int y, int width, int height, int currentNoteVal, int measure_id, int beat) {
+        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal, measure_id, beat));
+        y+= height;
+        currentNoteVal--;
+        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal, measure_id, beat));
+        y+= height;
+        currentNoteVal--;
+        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal, measure_id, beat));
+        y+= height;
+        currentNoteVal--;
+        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal, measure_id, beat));
+        y+= height;
+        currentNoteVal--;
+        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal, measure_id, beat));
+        y+= height;
+        currentNoteVal--;
+        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal, measure_id, beat));
+        y+= height;
+        currentNoteVal--;
+        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal, measure_id, beat));
+        y+= height;
+        currentNoteVal--;
+        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal, measure_id, beat));
+        y+= height;
+        currentNoteVal--;
+        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal, measure_id, beat));
+        y+= height;
+        currentNoteVal--;
+        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal, measure_id, beat));
+        y+= height;
+        currentNoteVal--;
+        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal, measure_id, beat));
+        y+= height;
+        currentNoteVal--;
+        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal, measure_id, beat));
+        y+= height;
+        currentNoteVal--;
+        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal, measure_id, beat));
+        y+= height;
+        currentNoteVal--;
+        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal, measure_id, beat));
+        y+= height;
+        currentNoteVal--;
+        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal, measure_id, beat));
+        y+= height;
+        currentNoteVal--;
+        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal, measure_id, beat));
+        y+= height;
+        currentNoteVal--;
+        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal, measure_id, beat));
+        y+= height;
+        currentNoteVal--;
+        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal, measure_id, beat));
+        y+= height;
+        currentNoteVal--;
+        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal, measure_id, beat));
+        y+= height;
+        currentNoteVal--;
+        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal, measure_id, beat));
+        y+= height;
+        currentNoteVal--;
+        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal, measure_id, beat));
+        y+= height;
+        currentNoteVal--;
+        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal, measure_id, beat));
+        y+= height;
+        currentNoteVal--;
+        rectangles.add(new Rectangle(x, y, width, height, currentNoteVal, measure_id, beat));
+    }
+    
     void addMeasure() {
         measures.add(new Measure());
         panelHeight += 100;

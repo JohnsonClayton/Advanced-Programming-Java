@@ -9,7 +9,9 @@ package mainApp.com.github.johnsonclayton.sheetmusicapp;
  *
  * @author clayt
  */
-public interface CommandListener {
-    public void commandRequested(int cmd);
-    public void commandRequested(int cmd, Rectangle rect);
+public class CommandListener {
+    CommandListener() {};
+    CommandListener(Bar bar) {};
+    public void commandRequested(int cmd){};
+    public void commandRequested(int cmd, Rectangle rect){};
 }
