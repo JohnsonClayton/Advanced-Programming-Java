@@ -20,10 +20,12 @@ import javax.swing.JPanel;
 class MainContentPanel extends JPanel{
     ArrayList<Rectangle> rectangles;
     ArrayList<Measure> measures;
+    int panelHeight;
     MainContentPanel() {
         setLayout(new BorderLayout());
         rectangles = new ArrayList<Rectangle>();
         measures = new ArrayList<Measure>();
+        panelHeight = 1500;
         
         initRectangles();
         
@@ -63,7 +65,7 @@ class MainContentPanel extends JPanel{
     }
     
     public Dimension getPreferredSize() {
-        return new Dimension(1900, 2000);
+        return new Dimension(1900, panelHeight);
     }
     
     public void paintComponent(Graphics g) {
@@ -103,33 +105,8 @@ class MainContentPanel extends JPanel{
             }
             y = init_y + (row * measure_separation);
 
-            //Vertical Bars at Start and End
-            g.drawLine(x, y, x, y + height * 10);
-            g.drawLine(x + width, y, x + width, y + height * 10);
-
-            //Horizontal Bars
-            g.drawLine(x, y, x+width, y);
-            y+= height;
-            g.drawLine(x, y, x+width, y);
-            y+= height;
-            g.drawLine(x, y, x+width, y);
-            y+= height;
-            g.drawLine(x, y, x+width, y);
-            y+= height;
-            g.drawLine(x, y, x+width, y);
-
-            y+= height;
-            y+= height;
-
-            g.drawLine(x, y, x+width, y);
-            y+= height;
-            g.drawLine(x, y, x+width, y);
-            y+= height;
-            g.drawLine(x, y, x+width, y);
-            y+= height;
-            g.drawLine(x, y, x+width, y);
-            y+= height;
-            g.drawLine(x, y, x+width, y);
+            
+            drawLines(g, x, y, width, height);
         }
     }
     
@@ -349,6 +326,38 @@ class MainContentPanel extends JPanel{
 
     void addMeasure() {
         measures.add(new Measure());
+        panelHeight += 100;
+        
         System.out.println("Measure added");
+    }
+
+    private void drawLines(Graphics g, int x, int y, int width, int height) {
+        //Vertical Bars at Start and End
+        g.drawLine(x, y, x, y + height * 10);
+        g.drawLine(x + width, y, x + width, y + height * 10);
+
+        //Horizontal Bars
+        g.drawLine(x, y, x+width, y);
+        y+= height;
+        g.drawLine(x, y, x+width, y);
+        y+= height;
+        g.drawLine(x, y, x+width, y);
+        y+= height;
+        g.drawLine(x, y, x+width, y);
+        y+= height;
+        g.drawLine(x, y, x+width, y);
+
+        y+= height;
+        y+= height;
+
+        g.drawLine(x, y, x+width, y);
+        y+= height;
+        g.drawLine(x, y, x+width, y);
+        y+= height;
+        g.drawLine(x, y, x+width, y);
+        y+= height;
+        g.drawLine(x, y, x+width, y);
+        y+= height;
+        g.drawLine(x, y, x+width, y);    
     }
 }
