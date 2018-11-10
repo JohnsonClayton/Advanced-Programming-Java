@@ -37,6 +37,27 @@ public class CustomPlayer {
         interval = 0;
     }
     
+    public void playBar(Bar bar) {
+        //Look at the link provided below and how I used the API in the past and figure it out
+        
+        /*
+        *-----------------------
+        *   General Algorithm
+        *-----------------------
+        *   Foreach measure in bar:
+        *       Foreach ArrayList<Note> beat in measure.beats:
+        *           if(beat.size > 0):
+        *               Foreach Note note in beat:
+        *                   Play (we want all notes on same beat to play at the same time)
+        *               Wait until done playing
+        *           else:
+        *               Play rest
+        *               Wait until done playing
+        */
+        
+        System.out.println("playBar reached");
+    }
+    
     public void playSingle(String filename) throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
         //Play filename
         if (pausedTime == 0) {
@@ -86,8 +107,9 @@ public class CustomPlayer {
     
     public void playSingleNote(Note note) throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
         //Play filename
-        String filename = note.getFile();
-        note.setBusy();
+        //String filename = note.getFile();
+        String filename = Util.getFileNameForNote(note);
+        // needed note.setBusy();
         
         if (pausedTime == 0) {
             interval = 0; //FIX ME: The interval is messed up somewhere below
@@ -131,16 +153,16 @@ public class CustomPlayer {
             clip.start();
         }
         
-        note.setAvailable();
+        // needed note.setAvailable();
     }
     
-    void playBar(Bar bar) throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException, InterruptedException, InterruptedException {
+    /*void playBar(Bar bar) throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException, InterruptedException, InterruptedException {
         //Play what is on the bar's queue (array)
         for(Note note : bar.getNotes()) {
             playSingleNote(note);
             Thread.sleep(note.getLength());
         }
-    }
+    }*/
     
     public void pauseAudio() {
         //Pause audio + save time to pausedTime

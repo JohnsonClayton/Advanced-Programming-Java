@@ -16,6 +16,7 @@ public class Util {
     public static final int ADD_MEASURE = 3;
     public static final int ADD_NOTE = 4;
     
+    public static final int REST_BEAT = 99;
     public static final int E_1 = 100;
     public static final int F_1 = 101;
     public static final int G_1 = 102;
@@ -41,4 +42,36 @@ public class Util {
     public static final int F_4 = 122;
     public static final int G_4 = 123;
     public static final int A_4 = 124;
+
+    static String getFileNameForNote(Note note) {
+        switch(note.value) {
+            case REST_BEAT:
+            case E_1:
+            case F_1:
+            case G_1:
+            case A_1:
+            case B_1:
+            case C_1:
+            case D_1:
+            case E_2:
+            case F_2:
+            case G_2:
+            case A_2:
+            case B_2:
+            case C_2:
+            case D_2:
+            case E_3:
+            case F_3:
+            case G_3:
+            case A_3:
+            case B_3:
+            case C_3:
+            case D_3:
+            case E_4:
+            case F_4:
+            case G_4:
+            case A_4:      
+        }
+        return "";
+    }
 }

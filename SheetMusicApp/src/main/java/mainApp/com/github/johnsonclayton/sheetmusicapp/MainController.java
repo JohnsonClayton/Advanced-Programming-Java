@@ -16,6 +16,7 @@ import javax.swing.JScrollPane;
  */
 class MainController extends JFrame{
     Bar bar;
+    CustomPlayer player;
     
     //Panels inside MainWindow
     MainContentPanel mainPanel;
@@ -30,6 +31,7 @@ class MainController extends JFrame{
         
         //Create Music Playing Objects
         bar = new Bar();
+        player = new CustomPlayer();
         
         //Create Panels
         mainPanel = new MainContentPanel();
@@ -49,14 +51,15 @@ class MainController extends JFrame{
             
         });
         
-        toolbar.setCommandListener(new CommandListener(bar) {
+        toolbar.setCommandListener(new CommandListener(bar, player) {
             @Override
             public void commandRequested(int cmd) {
                 switch(cmd) {
                     case Util.PLAY_MUSIC:
                         System.out.println("Play");
-                        System.out.println("Width: " + getWidth());
-                        System.out.println("Height: " + getHeight());
+                        
+                        player.playBar(bar);
+                        
                         break;
                     case Util.PAUSE_MUSIC:
                         System.out.println("Pause");

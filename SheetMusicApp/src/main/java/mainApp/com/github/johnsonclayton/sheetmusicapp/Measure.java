@@ -15,19 +15,26 @@ class Measure {
     ArrayList<ArrayList<Note>> beats;
     Measure() {
         beats = new ArrayList<>();
+        beats.add(new ArrayList<>());
+        beats.add(new ArrayList<>());
+        beats.add(new ArrayList<>());
+        beats.add(new ArrayList<>());
+
     }
 
     void addNote(Rectangle rect) {
-        if(rect.beat < 4) {
+        if(rect.beat >= 0 && rect.beat < 4) {
             boolean removed = false;
             for(Note note : beats.get(rect.beat)) {
                 if(rect.note_val == note.value) {
                     beats.get(rect.beat).remove(note);
                     removed = true;
+                    //System.out.println("Removed " + rect.note_val + " from beat " + rect.beat + " on measure " + this);
                 }
             }
             if(!removed) {
                 beats.get(rect.beat).add(new Note(rect.note_val));
+                //System.out.println("Added " + rect.note_val + " to beat " + rect.beat + " on measure " + this);
             }
         }
     }
