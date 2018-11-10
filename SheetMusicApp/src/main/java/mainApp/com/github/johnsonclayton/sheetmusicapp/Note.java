@@ -11,9 +11,15 @@ package mainApp.com.github.johnsonclayton.sheetmusicapp;
  */
 public class Note {
     public int value;
+    public char note_char;
     
     Note(int _value) {
         value = _value;
+        note_char = Util.getChar(value);
+    }
+    
+    public char getNoteChar() {
+        return note_char;
     }
     
     /*private String filename;

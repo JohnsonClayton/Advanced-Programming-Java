@@ -25,7 +25,8 @@ class Measure {
     void addNote(Rectangle rect) {
         if(rect.beat >= 0 && rect.beat < 4) {
             boolean removed = false;
-            for(Note note : beats.get(rect.beat)) {
+            
+            for(Note note : beats.get(rect.beat)) { //Getting concurrent modification exception here but it works.
                 if(rect.note_val == note.value) {
                     beats.get(rect.beat).remove(note);
                     removed = true;

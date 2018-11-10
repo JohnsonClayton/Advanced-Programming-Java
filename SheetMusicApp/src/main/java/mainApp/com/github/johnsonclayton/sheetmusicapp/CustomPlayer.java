@@ -55,6 +55,53 @@ public class CustomPlayer {
         *               Wait until done playing
         */
         
+        //Note note = bar.getMeasures().get(0).beats.get(0).get(0);
+        //System.out.println("playing note " + note.value + " (" + note.getNoteChar() + ") with file: " + Util.getFileNameForNote(note));
+        try {
+            for(Measure measure : bar.getMeasures()) {
+                for(ArrayList<Note> beat : measure.beats) {
+                    if(beat.size() > 0) {
+                        for(Note note : beat) {
+                            File audioFile = new File(Util.getFileNameForNote(note));
+                            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+
+                            AudioFormat format = audioStream.getFormat();
+                            DataLine.Info info = new DataLine.Info(Clip.class, format);
+
+                            Clip audioClip = (Clip) AudioSystem.getLine(info);
+
+                            audioClip.open(audioStream);
+                            audioClip.start();
+                        }
+                        Thread.sleep(500);
+                    }
+                    else {
+                        Thread.sleep(500);
+                    }
+                }
+            }
+        
+        
+        /*File audioFile = new File(Util.getFileNameForNote(note));
+        AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+        
+        AudioFormat format = audioStream.getFormat();
+        DataLine.Info info = new DataLine.Info(Clip.class, format);
+        
+        Clip audioClip = (Clip) AudioSystem.getLine(info);
+        
+        audioClip.open(audioStream);
+        audioClip.start();
+        
+        //End loop for beat
+        
+        Thread.sleep(1000);
+        audioClip.close();
+        audioStream.close();*/
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         System.out.println("playBar reached");
     }
     

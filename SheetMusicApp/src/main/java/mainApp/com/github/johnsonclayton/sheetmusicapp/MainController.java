@@ -44,8 +44,9 @@ class MainController extends JFrame{
             @Override
             public void commandRequested(int cmd, Rectangle rect) {
                 //Handle the new note added
+                synchronized(this) {
                 bar.addNoteAtHitBox(rect);
-                
+                }
                 System.out.println("Note received: " + rect.note_val);
             }
             

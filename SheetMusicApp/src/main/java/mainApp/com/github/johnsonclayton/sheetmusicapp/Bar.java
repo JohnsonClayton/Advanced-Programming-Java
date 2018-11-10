@@ -28,6 +28,10 @@ public class Bar {
         }
     }
     
+    public ArrayList<Measure> getMeasures() {
+        return measures;
+    }
+    
     /*private int length;
     private ArrayList<Note> notes;
     private int measureCount;

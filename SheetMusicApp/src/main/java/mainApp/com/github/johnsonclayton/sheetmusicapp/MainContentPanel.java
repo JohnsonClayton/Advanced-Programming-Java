@@ -35,17 +35,15 @@ class MainContentPanel extends JPanel{
                 //System.out.println("Mouse clicked");
                 for(Rectangle rect : rectangles) {
                     if(rect.containsMouse(e.getX(), e.getY())) {
+                        rect.filled = !rect.filled;
+                        repaint();
                         
                         //Send command that note was clicked
-                        commandListener.commandRequested(4, rect);
-                        
-                        rect.filled = !rect.filled;
+                        commandListener.commandRequested(4, rect);                        
                         
                         //Send command to add note and attach to this rectangle
                         System.out.println("Note added: " + rect.note_val);
                         
-                        
-                        repaint();
                         break;
                     }
                 }
