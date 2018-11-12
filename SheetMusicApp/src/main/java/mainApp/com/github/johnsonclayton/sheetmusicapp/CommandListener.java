@@ -12,6 +12,7 @@ package mainApp.com.github.johnsonclayton.sheetmusicapp;
 public class CommandListener {
     CommandListener() {};
     CommandListener(Bar bar, CustomPlayer player) {};
+    CommandListener(CustomPlayer player) {};
     public void commandRequested(int cmd){};
     public void commandRequested(int cmd, Rectangle rect){};
 }

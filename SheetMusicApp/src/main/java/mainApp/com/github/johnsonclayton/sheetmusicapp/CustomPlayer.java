@@ -16,12 +16,13 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.SwingWorker;
 
 /**
  *
  * @author clayt
  */
-public class CustomPlayer {
+public class CustomPlayer extends SwingWorker{
     private ArrayList<String> audioQueue;
     private int currentIndex;
     private double pausedTime;
@@ -30,14 +31,30 @@ public class CustomPlayer {
     private Clip clip;
     private AudioInputStream stream;
     private int interval;
-    public void CustomPlayer() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    private Bar bar;
+    
+    boolean isPaused;
+    boolean isStopped;
+   
+    
+    CustomPlayer(Bar _bar) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        currentIndex = -1;
+        audioQueue = new ArrayList<String>();
+        pausedTime = 0.00;
+        interval = 0;
+        isPaused = false;
+        isStopped = false;
+        bar = _bar;
+    }
+    
+     CustomPlayer() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         currentIndex = -1;
         audioQueue = new ArrayList<String>();
         pausedTime = 0.00;
         interval = 0;
     }
     
-    public void playBar(Bar bar) {
+    public void playBar() {
         //Look at the link provided below and how I used the API in the past and figure it out
         
         /*
@@ -60,6 +77,16 @@ public class CustomPlayer {
         try {
             for(Measure measure : bar.getMeasures()) {
                 for(ArrayList<Note> beat : measure.beats) {
+                    
+                    if(isStopped) return;
+
+                    
+                    //Check to see if paused or stopped
+                    while(isPaused) {
+                        Thread.sleep(500);
+                    }
+
+                    
                     if(beat.size() > 0) {
                         for(Note note : beat) {
                             File audioFile = new File(Util.getFileNameForNote(note));
@@ -102,6 +129,8 @@ public class CustomPlayer {
         catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        this.isStopped = true;
+        
         System.out.println("playBar reached");
     }
     
@@ -211,10 +240,12 @@ public class CustomPlayer {
         }
     }*/
     
-    public void pauseAudio() {
+    public void pause() {
         //Pause audio + save time to pausedTime
-        clip.stop();
-        pausedTime = clip.getFramePosition();
+        //clip.stop();
+        //pausedTime = clip.getFramePosition();
+        isPaused = true;
+        
     }
     
     public void stopAudio() {
@@ -230,4 +261,18 @@ public class CustomPlayer {
     public void addToQueueIndex(String filename, int index) {
         //Add filename to index of queue
     }
+
+    @Override
+    protected Object doInBackground() throws Exception {
+        System.out.println("doInBackground reached");
+        playBar();
+        return true;
+    }
+    
+    public void play() {
+        System.out.println("play reached : " + this.getState());
+        this.execute();
+    }
+
+   
 }

@@ -7,6 +7,11 @@ package mainApp.com.github.johnsonclayton.sheetmusicapp;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
@@ -31,7 +36,15 @@ class MainController extends JFrame{
         
         //Create Music Playing Objects
         bar = new Bar();
-        player = new CustomPlayer();
+        try {
+            player = new CustomPlayer(bar);
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (LineUnavailableException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         //Create Panels
         mainPanel = new MainContentPanel();
@@ -44,12 +57,11 @@ class MainController extends JFrame{
             @Override
             public void commandRequested(int cmd, Rectangle rect) {
                 //Handle the new note added
-                synchronized(this) {
+                //synchronized(this) {
                 bar.addNoteAtHitBox(rect);
-                }
+                //}
                 System.out.println("Note received: " + rect.note_val);
             }
-            
         });
         
         toolbar.setCommandListener(new CommandListener(bar, player) {
@@ -57,16 +69,34 @@ class MainController extends JFrame{
             public void commandRequested(int cmd) {
                 switch(cmd) {
                     case Util.PLAY_MUSIC:
-                        System.out.println("Play");
+                        System.out.println("Play"); 
+                        if(player.isPaused) {
+                            player.isPaused = false;
+                        }
+                        if(player.isStopped) {
+                            {
+                                try {
+                                    player = new CustomPlayer(bar);
+                                } catch (UnsupportedAudioFileException ex) {
+                                    Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                                } catch (LineUnavailableException ex) {
+                                    Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                                } catch (IOException ex) {
+                                    Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }
+                        }
                         
-                        player.playBar(bar);
+                        player.play();
                         
                         break;
                     case Util.PAUSE_MUSIC:
                         System.out.println("Pause");
+                        player.pause();
                         break;
                     case Util.STOP_MUSIC:
                         System.out.println("Stop");
+                        player.isStopped = true;
                         break;
                     case Util.ADD_MEASURE:
                         mainPanel.addMeasure();
