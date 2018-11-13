@@ -45,6 +45,11 @@ public class BarTest {
         
         assertEquals(3, instance.getMeasures().size());
         
+        for(Measure measure : instance.getMeasures()) {
+            for(ArrayList<Note> beat : measure.beats) {
+                assertEquals(0, beat.size());
+            }
+        }
     }
 
     /**
