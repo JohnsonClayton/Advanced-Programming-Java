@@ -134,8 +134,22 @@ public class CustomPlayer extends SwingWorker{
         System.out.println("playBar reached");
     }
     
-    public void playSingle(String filename) throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
-        //Play filename
+    public void playSingle(Rectangle rect) throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+        
+        System.out.println("Playing note " + rect.note_val);
+        
+        File audioFile = new File(Util.getFileNameForRect(rect));
+        AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+
+        AudioFormat format = audioStream.getFormat();
+        DataLine.Info info = new DataLine.Info(Clip.class, format);
+
+        Clip audioClip = (Clip) AudioSystem.getLine(info);
+
+        audioClip.open(audioStream);
+        audioClip.start();
+        
+        /*//Play filename
         if (pausedTime == 0) {
             interval = 60; //FIX ME: The interval is messed up somewhere below
             if (interval == 0) {
@@ -177,7 +191,7 @@ public class CustomPlayer extends SwingWorker{
             clip.setFramePosition((int)pausedTime);
             clip.start();
         }
-        
+        */
         
     }
     

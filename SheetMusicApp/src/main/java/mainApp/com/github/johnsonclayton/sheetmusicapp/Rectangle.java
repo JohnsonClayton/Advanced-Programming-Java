@@ -8,6 +8,7 @@ class Rectangle {
         int note_val;
         int measure_id;
         int beat;
+        boolean grayed;
         
         Rectangle(int _x, int _y, int _width, int _height, int _note_val, int _id, int _beat) {
             x = _x;
@@ -18,6 +19,7 @@ class Rectangle {
             note_val = _note_val;
             measure_id = _id;
             beat = _beat;
+            grayed = false;
         }
         
         public boolean containsMouse(int mouse_x, int mouse_y) {

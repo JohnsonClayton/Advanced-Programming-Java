@@ -6,6 +6,7 @@
 package mainApp.com.github.johnsonclayton.sheetmusicapp;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -18,7 +19,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 
 /**
  *
@@ -32,12 +35,15 @@ class MainContentPanel extends JPanel{
     private BufferedImage bassClef;
     private BufferedImage trebleClef;
     private Graphics2D g2;
+    public MouseEvent mouseEvent;
     
     MainContentPanel() {
         setLayout(new BorderLayout());
         rectangles = new ArrayList<>();
         measures = new ArrayList<>();
         panelHeight = 1500;
+        
+        
                 
         addMouseListener(new MouseListener() {
             @Override
@@ -45,15 +51,43 @@ class MainContentPanel extends JPanel{
                 //System.out.println("Mouse clicked");
                 for(Rectangle rect : rectangles) {
                     if(rect.containsMouse(e.getX(), e.getY())) {
-                        rect.filled = !rect.filled;
-                        repaint();
                         
-                        //Send command that note was clicked
-                        commandListener.commandRequested(4, rect);                        
+                        System.out.println(e.getButton());
                         
-                        //Send command to add note and attach to this rectangle
-                        //System.out.println("Note added: " + rect.note_val);
+                        //Button 1 should add (Primary Button)
+                        if(e.getButton() == 1 && !rect.filled) {
+                            rect.filled = true;
+                            unselectNotes();
+                            commandListener.commandRequested(Util.ADD_NOTE, rect);
+                            repaint();
+                        }
+                        else if(e.getButton() == 1 && rect.filled && !rect.grayed) {
+                            rect.filled = false;
+                            
+                            repaint();
+
+                            //Send command that note was clicked
+                            commandListener.commandRequested(Util.ADD_NOTE, rect);                        
+
+                            //Send command to add note and attach to this rectangle
+                            //System.out.println("Note added: " + rect.note_val);
+                        }
+                        else if(e.getButton() == 1 && rect.filled && rect.grayed) {
+                            rect.grayed = false;
+                            repaint();
+                        }
                         
+                        //Button 3 should create menu
+                        if(e.getButton() == 3 && rect.filled) {
+                            rect.grayed = true;
+                            repaint();
+                            
+                            mouseEvent = e;
+                            commandListener.commandRequested(Util.POP_UP_TRIGGERED);
+                            
+                           
+                            System.out.println("created menu");
+                        } 
                         break;
                     }
                 }
@@ -152,6 +186,9 @@ class MainContentPanel extends JPanel{
     }
     
     private void draw(Graphics g, Rectangle rect) {
+        if(rect.grayed) {
+            g.setColor(Color.gray);
+        }
         if(rect.filled) {
             g.fillOval(rect.x - 12, rect.y - 12, rect.width * 2, rect.height * 2 - 10); //For appearing to take up a whole space
             //g.drawLine(rect.x - 12, rect.y + (rect.height / 2), rect.x - 12, (rect.y + (rect.height / 2) ) + 200);
@@ -163,9 +200,7 @@ class MainContentPanel extends JPanel{
             }
             //g.drawLine(rect.x, 200, 200);
         }
-        else {
-            //g.drawRect(rect.x, rect.y, rect.width, rect.height);
-        }
+        g.setColor(Color.black);
     }
     
     void addMeasureHitBoxes(int x, int x_const, int y, int y_const, int width, int x_spacing, int height, int measure_id) {
@@ -302,5 +337,21 @@ class MainContentPanel extends JPanel{
         g2.drawImage(bassClef, 5 * (x - 100), 5 * (y + 350), this);
         g2.scale(5, 5);
         //g.drawImage(bassClef, x, y + 250, this);
+    }
+
+    public Rectangle getSelectedNote() {
+        Rectangle rect = null;
+        for(Rectangle rectangle : rectangles) {
+            if(rectangle.grayed) {
+                rect = rectangle;
+            }
+        }
+        return rect;
+    }
+
+    void unselectNotes() {
+        for(Rectangle rect : rectangles) {
+            rect.grayed = false;
+        }
     }
 }

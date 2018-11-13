@@ -5,6 +5,8 @@
  */
 package mainApp.com.github.johnsonclayton.sheetmusicapp;
 
+import java.awt.event.MouseEvent;
+
 /**
  *
  * @author clayt
