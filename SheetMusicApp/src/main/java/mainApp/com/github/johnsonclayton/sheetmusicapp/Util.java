@@ -41,6 +41,9 @@ public class Util {
     public static final int E_4 = 121;
     public static final int F_4 = 122;
     public static final int G_4 = 123;
+    
+    public static final String bass_clef = "C:\\Users\\clayt\\projects\\csci310\\SheetMusicApp\\src\\main\\java\\mainApp\\com\\github\\johnsonclayton\\sheetmusicapp\\\\media\\Bass-Clef.png";
+    public static final String treble_clef = "C:\\Users\\clayt\\projects\\csci310\\SheetMusicApp\\src\\main\\java\\mainApp\\com\\github\\johnsonclayton\\sheetmusicapp\\\\media\\Treble-Clef.png";
 
     static String getFileNameForNote(Note note) {
         String filename = "C:\\Users\\clayt\\projects\\csci310\\SheetMusicApp\\src\\main\\java\\mainApp\\com\\github\\johnsonclayton\\sheetmusicapp\\\\media\\";
@@ -205,4 +208,6 @@ public class Util {
         }
         return note_char;
     }
+
+    
 }

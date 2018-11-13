@@ -8,9 +8,16 @@ package mainApp.com.github.johnsonclayton.sheetmusicapp;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 /**
@@ -22,6 +29,9 @@ class MainContentPanel extends JPanel{
     ArrayList<Measure> measures;
     int panelHeight;
     private CommandListener commandListener;
+    private BufferedImage bassClef;
+    private BufferedImage trebleClef;
+    private Graphics2D g2;
     
     MainContentPanel() {
         setLayout(new BorderLayout());
@@ -42,7 +52,7 @@ class MainContentPanel extends JPanel{
                         commandListener.commandRequested(4, rect);                        
                         
                         //Send command to add note and attach to this rectangle
-                        System.out.println("Note added: " + rect.note_val);
+                        //System.out.println("Note added: " + rect.note_val);
                         
                         break;
                     }
@@ -69,6 +79,16 @@ class MainContentPanel extends JPanel{
                 //System.out.println("Mouse exited");
             }
         });
+        addMeasure();
+        
+        try {
+            bassClef = ImageIO.read(new File(Util.bass_clef));
+            trebleClef = ImageIO.read(new File(Util.treble_clef));
+        } catch (IOException ex) {
+            Logger.getLogger(MainContentPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }
     
     @Override
@@ -99,7 +119,7 @@ class MainContentPanel extends JPanel{
                 measure_separation = 650,
                 x_counter = 0,
                 x,
-                y;
+                y = init_y;
         
         int     bx = 150, 
                 bx_const = bx, 
@@ -121,6 +141,9 @@ class MainContentPanel extends JPanel{
                 x = init_x + (x_counter * width);
             }
             y = init_y + (row * measure_separation);
+            if(x_counter == 0) {
+                paintClefs(g, x, y);
+            }
 
             addMeasureHitBoxes(x + 50, bx_const, y - 35, y - 35, bwidth, bx_spacing, bheight, i);
             drawLines(g, x, y, width, height);
@@ -230,7 +253,7 @@ class MainContentPanel extends JPanel{
         measures.add(new Measure());
         panelHeight += 100;
         
-        System.out.println("Measure added");
+        //System.out.println("Measure added");
     }
 
     private void drawLines(Graphics g, int x, int y, int width, int height) {
@@ -265,5 +288,19 @@ class MainContentPanel extends JPanel{
 
     void setCommandListener(CommandListener _listener) {
         commandListener = _listener;
+    }
+
+    private void paintClefs(Graphics g, int x, int y) {
+        //System.out.println("clefs added");
+        g2 = (Graphics2D) g;
+        g2.scale(0.1, 0.1);
+        //g2.drawImage(trebleClef, 10 * (x - 550), 10 * (y + 900), this);
+        g2.drawImage(trebleClef, 10 * (x - 150), 10 * (y), this);
+
+        g2.scale(2, 2);
+        //g2.drawImage(bassClef, x - 120, y + 2000, this);
+        g2.drawImage(bassClef, 5 * (x - 100), 5 * (y + 350), this);
+        g2.scale(5, 5);
+        //g.drawImage(bassClef, x, y + 250, this);
     }
 }

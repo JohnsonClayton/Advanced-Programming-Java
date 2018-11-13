@@ -112,6 +112,8 @@ class MainController extends JFrame{
             public void commandRequested(int cmd, Rectangle rect) {}
         });
         
+        bar.addMeasure();
+        
         //Add panels
         add(toolbar, BorderLayout.NORTH);
         add(new JScrollPane(mainPanel), BorderLayout.CENTER);
