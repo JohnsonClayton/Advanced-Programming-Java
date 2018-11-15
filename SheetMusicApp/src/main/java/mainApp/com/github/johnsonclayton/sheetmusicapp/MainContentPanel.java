@@ -354,4 +354,23 @@ class MainContentPanel extends JPanel{
             rect.grayed = false;
         }
     }
+
+    void reset() {
+        rectangles = new ArrayList<>();
+        measures = new ArrayList<>();
+        panelHeight = 1500;
+
+        addMeasure();
+        
+        try {
+            bassClef = ImageIO.read(new File(Util.bass_clef));
+            trebleClef = ImageIO.read(new File(Util.treble_clef));
+        } catch (IOException ex) {
+            Logger.getLogger(MainContentPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        repaint();
+    }
+
+    
 }

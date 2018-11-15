@@ -32,6 +32,13 @@ public class Bar {
         return measures;
     }
     
+    public void reset() {
+        measures.clear();
+        if(measures.isEmpty()) {
+            System.out.println("Bar cleared");
+        }
+    }
+    
     /*private int length;
     private ArrayList<Note> notes;
     private int measureCount;
@@ -50,6 +57,8 @@ public class Bar {
     public ArrayList<Note> getNotes() {
         return notes;
     }*/
+
+    
 
     
 

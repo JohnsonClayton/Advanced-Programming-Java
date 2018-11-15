@@ -8,7 +8,6 @@ package mainApp.com.github.johnsonclayton.sheetmusicapp;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,10 +15,15 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.json.JsonObject;
+import javax.json.*;
+
 
 /**
  *
@@ -34,6 +38,9 @@ class MainController extends JFrame{
     PlayBackToolBar toolbar;
     
     JPopupMenu optionsMenu;
+    JMenuBar menuBar;
+    
+    CustomFileManager file_manager;
     
     MainController() {
         //Init
@@ -127,6 +134,10 @@ class MainController extends JFrame{
             public void commandRequested(int cmd, Rectangle rect) {}
         });
         
+        createMenuBar();
+        
+        
+        
         optionsMenu = new JPopupMenu();
         /*
         JMenuItem item1 = new JMenuItem("Sharp");
@@ -174,11 +185,105 @@ class MainController extends JFrame{
         add(toolbar, BorderLayout.NORTH);
         add(new JScrollPane(mainPanel), BorderLayout.CENTER);
         
+        setJMenuBar(menuBar);
+        
+        file_manager = new CustomFileManager();
+        
         pack();
         setVisible(true);
     }
     
+    public void saveFile() {
+        if(file_manager.currentFileHasName()) {
+            //Save to that file
+            file_manager.createJSON(bar);
+            file_manager.writeToFile(file_manager.getCurrentFileName());
+        } else {
+            saveAsFile();
+        }
+        
+        
+        System.out.println("save file reached");
+    }
+    
+    public void saveAsFile() {
+        System.out.println("save as file reached"); 
+        
+        String filename = null;
+        
+        //Prompt user with window to select where to save file
+        
+        
+        
+        //Create JSON Object from Bar Object
+        file_manager.createJSON(bar); 
+        
+        
+        //Write to file
+        if(filename != null) {
+            file_manager.writeToFile(filename);
+        } else {
+            System.out.println("filename is null");
+        }
+        
+    }
+    
+    public void openAnotherFile() {
+        System.out.println("open file reached");        
+    }
+    
+    public void openNewProject() {
+        
+        //Prompt user to check if they really want to delete without saving
+        
+            //If yes, delete everything current in bar
+        reset();
+        
+            //Open file
+        
+        System.out.println("open new file reached");
+    }
+    
+    private void reset() {
+        bar.reset();
+        mainPanel.reset();
+        file_manager.reset();
+    }
+    
     public void testMe() {
         System.out.println("hello!!!!");
+    }
+
+    private void createMenuBar() {
+        menuBar = new JMenuBar();
+        
+        JMenu fileMenu = new JMenu("File");
+        JMenuItem newButton = new JMenuItem("New Project");
+        JMenuItem saveButton = new JMenuItem("Save");
+        JMenuItem saveAsButton = new JMenuItem("Save as...");
+        JMenuItem openButton = new JMenuItem("Open project...");
+        
+        newButton.addActionListener(e -> {
+           openNewProject(); 
+        });
+        
+        saveButton.addActionListener(e -> {
+           saveFile(); 
+        });
+        
+        saveAsButton.addActionListener(e -> {
+            saveAsFile();
+        });
+        
+        openButton.addActionListener(e -> {
+           openAnotherFile(); 
+        });
+        
+        fileMenu.add(newButton);
+        fileMenu.add(saveButton);
+        fileMenu.add(saveAsButton);
+        fileMenu.add(openButton);
+        
+        menuBar.add(fileMenu);    
     }
 }
