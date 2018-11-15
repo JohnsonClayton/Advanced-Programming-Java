@@ -209,7 +209,7 @@ class MainController extends JFrame{
     public void saveAsFile() {
         System.out.println("save as file reached"); 
         
-        String filename = null;
+        String filename = "test";
         
         //Prompt user with window to select where to save file
         
