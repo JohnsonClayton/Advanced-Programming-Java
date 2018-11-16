@@ -10,4 +10,5 @@
  - [SQLite](https://github.com/JohnsonClayton/csci310/blob/master/sqlite/src/main/java/com/github/johnsonclayton/sqlite/App.java)
     - [Test Results](https://github.com/JohnsonClayton/csci310/blob/master/sqlite/testspassed.PNG)
     - Retrieving data demonstrated in tests found [here](https://github.com/JohnsonClayton/csci310/blob/master/sqlite/src/test/java/com/github/johnsonclayton/sqlite/AppTest.java)
- - Assn #5
+ - [Java Final Project](https://github.com/JohnsonClayton/csci310/blob/master/SheetMusicApp/src/main/java/mainApp/com/github/johnsonclayton/sheetmusicapp/App.java)
+  - I've currently completed all I intend to on this project. Please let me know if further details are required.
