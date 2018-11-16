@@ -39,4 +39,10 @@ class Measure {
             }
         }
     }
+    
+    void addNoteAtBeat(int _beat, Note _note) {
+        if(_beat >= 0 && _beat < 4) {
+            beats.get(_beat).add(_note);
+        }
+    }
 }

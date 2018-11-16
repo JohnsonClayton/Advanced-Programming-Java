@@ -8,6 +8,7 @@ package mainApp.com.github.johnsonclayton.sheetmusicapp;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +24,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.json.JsonObject;
 import javax.json.*;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 /**
@@ -196,7 +199,7 @@ class MainController extends JFrame{
     public void saveFile() {
         if(file_manager.currentFileHasName()) {
             //Save to that file
-            file_manager.createJSON(bar);
+            file_manager.createJSONFromBar(bar);
             file_manager.writeToFile(file_manager.getCurrentFileName());
         } else {
             saveAsFile();
@@ -209,26 +212,49 @@ class MainController extends JFrame{
     public void saveAsFile() {
         System.out.println("save as file reached"); 
         
-        String filename = "test";
+        String filename = null;
         
         //Prompt user with window to select where to save file
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("JSON Files", "json");
+        chooser.setFileFilter(filter);
         
-        
-        
-        //Create JSON Object from Bar Object
-        file_manager.createJSON(bar); 
-        
-        
-        //Write to file
-        if(filename != null) {
-            file_manager.writeToFile(filename);
-        } else {
-            System.out.println("filename is null");
+        int button_pressed_val = chooser.showOpenDialog(this);
+        if(button_pressed_val == JFileChooser.APPROVE_OPTION) {
+            System.out.println("This file was chosen: " + chooser.getSelectedFile().getAbsolutePath());
+            filename = chooser.getSelectedFile().getAbsolutePath();
+            //Create JSON Object from Bar Object
+            file_manager.createJSONFromBar(bar);
+
+            //Write to file
+            if (filename != null) {
+                file_manager.writeToFile(filename);
+            } else {
+                System.out.println("filename is null");
+            }
         }
+       
+        
+        
         
     }
     
     public void openAnotherFile() {
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("JSON Files", "json");
+        chooser.setFileFilter(filter);
+        int button_pressed_val = chooser.showOpenDialog(this);
+        if(button_pressed_val == JFileChooser.APPROVE_OPTION) {
+            reset();
+            try {
+            bar = file_manager.createBarFromJSON(chooser.getSelectedFile().getAbsolutePath());
+            
+            mainPanel.updateWithBar(bar, mainPanel.getGraphics());
+            } catch (FileNotFoundException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        
         System.out.println("open file reached");        
     }
     

@@ -43,7 +43,7 @@ class MainContentPanel extends JPanel{
         measures = new ArrayList<>();
         panelHeight = 1500;
         
-        
+        addMeasure();
                 
         addMouseListener(new MouseListener() {
             @Override
@@ -113,13 +113,13 @@ class MainContentPanel extends JPanel{
                 //System.out.println("Mouse exited");
             }
         });
-        addMeasure();
+        
         
         try {
             bassClef = ImageIO.read(new File(Util.bass_clef));
             trebleClef = ImageIO.read(new File(Util.treble_clef));
         } catch (IOException ex) {
-            Logger.getLogger(MainContentPanel.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("I guess you don't get to enjoy the lovely images I've prepared for you...");
         }
         
         
@@ -133,6 +133,8 @@ class MainContentPanel extends JPanel{
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        
+        System.out.println("Size of rectangles in painComponent: " + rectangles.size());
         
         paintBar(g);
         paintNotes(g);
@@ -356,8 +358,8 @@ class MainContentPanel extends JPanel{
     }
 
     void reset() {
-        rectangles = new ArrayList<>();
-        measures = new ArrayList<>();
+        rectangles.clear();
+        measures.clear();
         panelHeight = 1500;
 
         addMeasure();
@@ -367,6 +369,56 @@ class MainContentPanel extends JPanel{
             trebleClef = ImageIO.read(new File(Util.treble_clef));
         } catch (IOException ex) {
             Logger.getLogger(MainContentPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        System.out.println("Size of rectangles before repaint: " + rectangles.size());
+        repaint();
+        System.out.println("Size of rectangles after repaint: " + rectangles.size());
+    }
+
+    void updateWithBar(Bar bar, Graphics g) {
+        //Update GUI based on what Bar looks like at this point
+        
+        for(int i = 0; i < bar.getMeasures().size(); i++) {
+            addMeasure();
+        }
+        
+        measures = bar.getMeasures();
+       
+        this.update(g);
+        System.out.println("Size of rectangles in updateWithBar : " + rectangles.size());
+
+        /*for(Measure measure : measures) {
+            //System.out.println("Entered measures loop");
+            for(ArrayList<Note> notes : measure.beats) {
+                //System.out.println("\tEntered notes loop");
+                for(Note note : notes) { //Why doesn't rectangles have any elements?
+                    //System.out.println("\t\tEntered rect loop");
+                    for(Rectangle rect : rectangles) {
+                        //if(rect.beat == notes.indexOf(note) && rect.note_val == note.value) {
+                        System.out.println("Comparing...");
+                        if(rect.beat == measure.beats.indexOf(notes)&& rect.note_val == note.value) {
+                            rect.filled = true;
+                            System.out.println("Note placed from file: " + note.value);
+                        }
+                    }
+                }
+            }
+        }*/
+        Measure measure;
+        int counter = 0;
+        for(Rectangle rect : rectangles) {
+            measure = measures.get(rect.measure_id);
+            
+            counter = 0;
+            for(ArrayList<Note> beat : measure.beats) {
+                counter++;
+                for(Note note : beat) {
+                    if(note.value == rect.note_val && counter == rect.beat) {
+                        rect.filled = true;
+                    }
+                }
+            }
         }
         
         repaint();

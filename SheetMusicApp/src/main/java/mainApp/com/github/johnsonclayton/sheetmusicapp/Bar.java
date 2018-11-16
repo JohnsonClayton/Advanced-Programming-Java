@@ -21,6 +21,9 @@ public class Bar {
     void addMeasure() {
         measures.add(new Measure());
     }
+    void addBuiltMeasureObject(Measure _measure) {
+        measures.add(_measure);
+    }
     
     void addNoteAtHitBox(Rectangle rect) {
         if(rect.measure_id < measures.size()) {
